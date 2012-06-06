@@ -1,12 +1,7 @@
 {
-	"bookmarksbar":
+	"name":
 	{
-		"message": "書籤列",
-		"description":"書籤列"
-	},
-	"otherbookmarks":
-	{
-		"message": "其他書籤",
-		"description":"其他書籤"
+		"message"     : "TopPlayer",
+		"description" : "TopPlayer"
 	}
 }
