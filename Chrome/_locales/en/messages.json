@@ -1,0 +1,12 @@
+{
+	"bookmarksbar":
+	{
+		"message": "Bookmarks Bar",
+		"description":"書籤列"
+	},
+	"otherbookmarks":
+	{
+		"message": "Other Bookmarks",
+		"description":"其他書籤"
+	}
+}
