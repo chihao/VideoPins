@@ -5,7 +5,8 @@
 	"permissions": [
 	"tabs", "http://*/*", "https://*/*"
 	],
-	"plugins": [{ "path": "plugin/npFBTestPlugin.so" }],
+	"plugins": [{ "path": "plugin/npFBTestPlugin.so" },
+                { "path": "plugin/plugin.dll" }],
 	"icons": {
 	    "16": "images/icon16.png",
 		"32": "images/icon32.png",

@@ -16,6 +16,14 @@ function plugintest()
     // return plugin.echo("This plugin seems to be working!");  // call a method in your plugin
 }
 
+function dlltest()
+{
+    var plugin = document.getElementById("dll");
+    console.log(plugin);
+    return plugin.add(1, 5);  // call a method in your plugin
+    // return plugin.echo("This plugin seems to be working!");  // call a method in your plugin
+}
+dlltest();
 /*
 function openTab(url, selected)
 {
