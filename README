@@ -2,8 +2,3 @@ Play the video in the 'Always on Top' of the pop-up window.
 This is a browser extension for chrome/chromium, that will support firefox and opera in future.
 
 It's only run at www.youtube.com/* now, I hope it can run all embedded video of any website.
-
-change log:
-  - 0.0.2.206
-    Support any youtube video to pop-up, just click the title of video. (see help1.bmp)
-    Support win7, winXP, kubuntu12.04 LTS. The others version need to test.
