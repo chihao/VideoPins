@@ -1,9 +1,9 @@
 {
-	"name": "__MSG_name__",
-	"version": "0.0.2.206",
-	"default_locale": "en",
+    "name": "__MSG_name__",
+    "version": "0.0.2.206",
+    "default_locale": "en",
     "description": "__MSG_description__",
-	"background_page": "background.html",
+    "background_page": "background.html",
     "update_url": "http://clients2.google.com/service/update2/crx",
     
     "permissions":
@@ -11,9 +11,9 @@
         "tabs",
         "http://*/*",
         "https://*/*"
-	],
+    ],
     
-	"plugins":
+    "plugins":
     [
         { "path": "plugin/npVideoPins.so" },
         { "path": "plugin/npVideoPins.dll" }
@@ -28,11 +28,11 @@
         }
     ],
   
-	"icons":
+    "icons":
     {
-	    "16": "images/icon16.png",
-	 	"32": "images/icon32.png",
-	 	"64": "images/icon64.png",	
-	 	"128": "images/icon128.png"
-	}
+        "16": "images/icon16.png",
+        "32": "images/icon32.png",
+        "64": "images/icon64.png",	
+        "128": "images/icon128.png"
+    }
 }
