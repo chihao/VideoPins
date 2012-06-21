@@ -2,3 +2,8 @@ This is just for test.
 
 Play a video with an always on top window.
 This app will support to  chrome/chromium and firefox.
+
+change log:
+  - 0.0.2.206
+    Support any youtube video to pop-up, just click the title of video. (see help1.bmp)
+    Support win7, winXP, kubuntu12.04. The others version have to test.
