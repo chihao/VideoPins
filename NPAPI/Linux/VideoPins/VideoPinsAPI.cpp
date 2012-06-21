@@ -126,6 +126,7 @@ void VideoPinsAPI::testEvent()
 }
 
 // ----------------------------------------------------------------------------------
+// Part of wmctrl source code.
 
 static Window *get_client_list (Display *disp, unsigned long *size) {/*{{{*/
     Window *client_list;
