@@ -1,7 +1,7 @@
-This is just for test.
+Play the video in the 'Always on Top' of the pop-up window.
+This is a browser extension for chrome/chromium, that will support firefox and opera in future.
 
-Play a video with an always on top window.
-This app will support to  chrome/chromium and firefox.
+It's only run at www.youtube.com/* now, I hope it can run all embedded video of any website.
 
 change log:
   - 0.0.2.206
