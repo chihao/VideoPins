@@ -1,0 +1,65 @@
+﻿<html>
+<head>
+<style>
+    body
+    {
+        overflow: hidden;
+    }
+    #video
+    {
+        top: 0px;
+        left: 0px;
+        position: absolute;
+    }
+    #embedVideoPins
+    {
+        top: -10000px;
+        left: -10000px;
+        position: absolute;
+        width: 1000px;
+    }
+</style>
+
+<!--
+<link type="text/css" href="css/cupertino/jquery-ui-1.8.18.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.18.custom.min.js"></script>
+-->
+<script type="text/javascript" src="VideoPins.js"></script>
+</head>
+<body>
+    <!--<iframe width="560" height="315" src="http://www.youtube.com/embed/Qla_Q5X2M5I" frameborder="0" allowfullscreen></iframe>-->
+    <!--<iframe width="560" height="315" src="http://www.youtube.com/embed/0EdaKlqIwPU" frameborder="0" allowfullscreen></iframe>-->
+    <div id="video"></div>
+
+    <embed id="embedVideoPins" type="application/x-videopins">
+    <script type="text/javascript">
+        var bg_page = chrome.extension.getBackgroundPage();
+        var obj = JSON.parse(localStorage['video']);
+
+        document.title = obj.title;        
+        document.getElementById('video').innerHTML = obj.html;
+                
+        window.onload = function()
+        {	// after page onloaded.
+            var m_Pin = new VideoPins(document.getElementById("embedVideoPins"));
+            
+            // windows offset: width=10, height=27. correct=650,418.
+            m_Pin.HookWindow(document.title, obj.x, obj.y, obj.width+bg_page.OS_windowOffsetW, obj.height+bg_page.OS_windowOffsetH);
+
+            chrome.windows.getCurrent(
+                function(window)
+                {
+                    var newPin = new Object();
+                    newPin.hWnd = 0;
+                    newPin.title = obj.title;
+                    //alert(window.width +'\n' + window.height);
+                    
+                    bg_page.Pins.add(window.id, newPin);
+                });
+
+            //m_Pin.test(document.title);
+        }        
+    </script>
+</body>
+</html>

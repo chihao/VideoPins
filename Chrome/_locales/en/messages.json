@@ -1,7 +1,9 @@
 {
-	"name":
-	{
-		"message"     : "TopPlayer",
-		"description" : "TopPlayer"
-	}
+	"name": {
+        "message": "VideoPins"
+	},
+    
+    "description": {
+        "message": "Play the video in the 'Always on Top' of the pop-up window."
+   }
 }

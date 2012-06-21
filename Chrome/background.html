@@ -1,77 +1,7 @@
 ﻿<html>
 	<head>
-        <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
-        <script type="text/javascript" src="js/dump.js"></script>
 		<script src="background.js"></script>
-
-		<script type="text/javascript">
-			function plugin0()
-	        {
-	            return document.getElementById('plugin0');
-	        }
-	        function plugin1()
-	        {
-	            return document.getElementById('plugin1');
-	        }
-	        function plugin2()
-	        {
-	            return document.getElementById('plugin2');
-	        }
-	        plugin = plugin0;
-			function addEvent(obj, name, func)
-	        {
-	            if (window.addEventListener) {
-	                obj.addEventListener(name, func, false); 
-	            } else {
-	                obj.attachEvent("on"+name, func);
-	            }
-	        }
-    		function load()
-	        {
-	            addEvent(plugin(), 'test', function(){
-	                alert("Received a test event from the plugin.")
-	            });
-	        }
-	        function pluginLoaded() {
-	            alert("Plugin loaded!");
-	        }
-	        function addTestEvent()
-	        {
-	            addEvent(plugin(), 'echo', function(txt,count){
-	                alert(txt+count);
-	            });
-	        }
-	        
-	        function testEvent()
-	        {
-	            plugin().testEvent();
-	        }
-	        
-	        function pluginValid()
-	        {
-	            if(plugin().valid){
-	                alert(plugin().echo("This plugin seems to be working!"));
-	            } else {
-	                alert("Plugin is not working :(");
-	            }
-	        }
-		</script>
 	</head>
-	<!--<body onload="load()">-->
 	<body>
-    
-		<embed id="dll" type="application/x-plugin">
-		<!-- <embed id="plugin0" type="application/x-fbtestplugin"> -->
-        <!--
-		<object id="plugin0" type="application/x-fbtestplugin" width="300" height="300">
-    		<param name="onload" value="pluginLoaded" />
-		</object><br />
-		<object id="plugin1" type="application/x-fbtestplugin-math" width="300" height="300">
-	    	<param name="onload" value="pluginLoaded" />
-		</object><br />
-		<object id="plugin2" type="application/x-fbtestmathplugin" width="300" height="300">
-	    	<param name="onload" value="pluginLoaded" />
-		</object><br />
-        -->
 	</body>
 </html>
