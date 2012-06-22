@@ -1,6 +1,7 @@
 change log:
   - 0.0.2.208
     Add a button "VideoPins" to #watch-actions
+    Disable title click pop-up.
 
   - 0.0.2.206
     Support any youtube video to pop-up, just click the title of video. (see help1.bmp)
