@@ -32,7 +32,7 @@ FB::variant VideoPinsAPI::echo(const FB::variant& msg)
 /// @brief  Echos whatever is passed from Javascript.
 ///         Go ahead and change it. See what happens!
 ///////////////////////////////////////////////////////////////////////////////
-void VideoPinsAPI::HookWindow(const std::string classN, const std::string title, const int x, const int y, const int width, const int height)
+FB::variant VideoPinsAPI::HookWindow(const std::string classN, const std::string title, const int x, const int y, const int width, const int height)
 {
     Window activate = EXIT_FAILURE;
     Display *disp = XOpenDisplay(NIL);
@@ -50,6 +50,8 @@ void VideoPinsAPI::HookWindow(const std::string classN, const std::string title,
     XResizeWindow(disp, activate, width, height);
 
     XCloseDisplay(disp);
+
+    return activate;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

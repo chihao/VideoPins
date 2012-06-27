@@ -106,7 +106,7 @@ public:
     FB::variant echo(const FB::variant& msg);
 
     // Method HookWindow
-    void HookWindow(const std::string classN, const std::string title, const int x, const int y, const int width, const int height);
+    FB::variant HookWindow(const std::string classN, const std::string title, const int x, const int y, const int width, const int height);
     
     // Method Xtest
     FB::variant Xtest(const std::string classN, const std::string title);

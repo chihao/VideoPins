@@ -5,5 +5,9 @@
     
     "description": {
         "message": "在置頂的彈出式視窗中播放影片。"
+   },
+   
+   "tooltip": {
+        "message": "置頂"
    }
 }

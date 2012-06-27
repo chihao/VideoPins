@@ -1,16 +1,18 @@
 {
     "name": "__MSG_name__",
-    "version": "0.0.2.208",
+    "version": "0.0.2.35",
     "default_locale": "en",
     "description": "__MSG_description__",
     "background_page": "background.html",
+    "options_page": "options.html",
     "update_url": "http://clients2.google.com/service/update2/crx",
-    
     "permissions":
     [
         "tabs",
-        "http://*/*",
-        "https://*/*"
+        "http://*.youtube.com/*",
+        "http://youtube.com/*",
+        "https://*.youtube.com/*",
+        "https://youtube.com/*"
     ],
     
     "plugins":
@@ -22,9 +24,9 @@
     "content_scripts":
     [
         {
-            "matches": ["http://*/*", "https://*/*"],
+            "matches": ["http://*.youtube.com/*", "http://youtube.com/*", "https://*.youtube.com/*", "https://youtube.com/*"],
             "js": ["/js/jquery-1.7.1.min.js", "content_script.js"],
-            "run_at": "document_end"
+            "run_at": "document_idle"
         }
     ],
   

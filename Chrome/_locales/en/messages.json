@@ -5,5 +5,9 @@
     
     "description": {
         "message": "Play the video in the 'Always on Top' of the pop-up window."
+   },
+   
+   "tooltip": {
+        "message": "Pop-up"
    }
 }

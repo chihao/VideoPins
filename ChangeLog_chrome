@@ -1,4 +1,9 @@
 change log:
+  - 0.0.2.35
+    Change the image of button "VideoPins".
+    It's will resize the video when resize the pop-up window.
+    VideoPins plugin will return pop-up window id(hWnd).
+
   - 0.0.2.208
     Add a button "VideoPins" to #watch-actions
     Disable title click pop-up.
