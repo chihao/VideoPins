@@ -2,40 +2,38 @@ console.log(window.location.href);
 
 if(window.location.href.indexOf("#")<0)
 {
-	/* open button */
-	var a = document.createElement('a');
-	a.id   = 'videopins_pin';
-	a.href = '#';
-	a.title = chrome.i18n.getMessage('tooltip');
-	// a.style.display  = 'block';
-	a.style.display  = 'hidden';
-	a.style.width    = '32px';
-	a.style.height   = '32px';
-	a.style.overflow = 'hidden';
-	a.style.zIndex   = '999';
-	a.style.position = 'fixed';
-	a.style.top      = '260px';
-	a.style.right    = '0';
-	a.style.background = 'url('+chrome.extension.getURL('/images/icon32.png')+') no-repeat';
-	document.body.appendChild(a);
+    $("body").append('<button type="button" id="videopins_pin" class="yt-uix-tooltip-reverse yt-uix-button yt-uix-button-default yt-uix-tooltip" title="'+chrome.i18n.getMessage('tooltip')+'" data-tooltip-text="'+chrome.i18n.getMessage('tooltip')+'">\
+                          <span class="yt-uix-button-content">\
+                              <img class="addto-label" src="'+chrome.extension.getURL('/images/icon.png')+'" alt="'+chrome.i18n.getMessage('tooltip')+'">' + 
+                          '</span>\
+                      </button>');
+
+    $('#videopins_pin').css({
+        top: '260px',
+        right: '0px',
+        position: "fixed",
+        zIndex: '999'
+    });
 
 	$('#videopins_pin').click(function(){
 	    /* do somtthing */    
-        // var title = document.title;
-        // var html = comm.getYoutubeEmbedLink(window.location.href);
         var obj = new Object();
             obj.title = document.title;
             obj.src = window.location.href;
 
         chrome.extension.sendRequest({request: "openWindow", value: obj});
-        //comm.popup(title, html);
 	    return false;
 	});
 
 	$("body").hover(function(){
-		$('#videopins_pin').show();
+        $('#videopins_pin').animate({
+            right: '0px'
+          }, 300 );
 	}, function(){
-		$('#videopins_pin').hide();	
-	});
+        var width = $('#videopins_pin')[0].offsetWidth;
+        $('#videopins_pin').animate({
+            right: -width + 'px'
+          }, 300 );
+    });
 }
 

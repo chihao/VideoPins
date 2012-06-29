@@ -25,6 +25,7 @@
 
             "include_globs": [ "http://*.youtube.com/embed/*", "http://youtube.com/embed/*", "https://*.youtube.com/embed/*", "https://youtube.com/embed/*" ],
             "matches": ["http://*/*", "https://*/*"],
+            "css": ["/css/www-core-vflDwxflm.css"],
             "js": ["/js/jquery-1.7.1.min.js", "/js/content_scripts/embed/youtube_embed.js"],
             "run_at": "document_idle"
         }
