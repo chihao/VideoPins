@@ -10,7 +10,6 @@ VideoPins.prototype =
 	HookWindow :
 	function(title, x, y, width, height)
 	{
-        // return hWnd.
         console.log("Class:" + this.getClassName() + '\n' +
         			"Title:" + title + '\n' + 
         			"x:" + x + '\n' + 

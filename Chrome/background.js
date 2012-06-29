@@ -76,16 +76,9 @@ function getYoutubeEmbedLink(url)
 
 function getYoutubeId(url)
 {
-    if (/^https?\:\/\/.+/i.test(url)) {
-        var temp = /[\?\&]v=([^\?\&]+)/.exec(url);
-        if (temp) {
-            return temp[1];
-        } else {
-            return null;
-        }
-    } else {
-        // other case left as an exercise
-    }
+    var reg = new RegExp('(?:https?://)?(?:www\\.)?(?:youtu\\.be/|youtube\\.com(?:/embed/|/v/|/watch\\?v=))([\\w-]{10,12})', 'g');
+    var temp = reg.exec(url);
+    return (temp)? temp[1] : null;
 }
 /* get Youtube video id */
 // var text = (
