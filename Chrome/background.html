@@ -1,5 +1,44 @@
 ﻿<html>
 	<head>
+		<script type="text/javascript">
+			var OS_Flag = navigator.appVersion;
+
+			var OS_windowOffsetW = 0;
+			var OS_windowOffsetH = 0;
+
+			if(OS_Flag.indexOf("NT 5.1") > 0){
+			    OS_windowOffsetW = 10; OS_windowOffsetH = 27;
+			}
+			/*
+			if(OS_Flag.indexOf("NT 6.1") > 0 ){
+			    document.getElementById("OS").innerHTML="Microsoft Windows 7";  //6
+			  }
+			  else if(OS_Flag.indexOf("NT 6.0") > 0 ){
+			    document.getElementById("OS").innerHTML="Microsoft Windows Vista";  //6
+			  }
+			  else if(OS_Flag.indexOf("NT 5.0") > 0 ){
+			    document.getElementById("OS").innerHTML="Microsoft Windows 2000";  //4
+			  }
+			  else if(OS_Flag.indexOf("NT 5.1") > 0){
+			    document.getElementById("OS").innerHTML="Microsoft Windows XP"; //5
+			  }
+			  else if (OS_Flag.indexOf("Win 9x 4") > 0){
+			    document.getElementById("OS").innerHTML="Microsoft Windows ME";  //3
+			  }
+			  else if (OS_Flag.indexOf("98") > 0){
+			    document.getElementById("OS").innerHTML="Microsoft Windows 98";  //2
+			  }
+			  else if (OS_Flag.indexOf("95") > 0){
+			    document.getElementById("OS").innerHTML="Microsoft Windows 95";  //1
+			  }
+			  else if (OS_Flag.indexOf("NT 5.2") > 0){
+			    document.getElementById("OS").innerHTML="Microsoft Windows 2003";  //6
+			  }
+			  else {
+			    document.getElementById("OS").innerHTML="非微軟作業系統"; //0
+			  }
+			*/
+		</script>
 		<script src="background.js"></script>
 	</head>
 	<body>

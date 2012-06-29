@@ -1,4 +1,7 @@
 change log:
+  - 0.0.2.4
+    Support embedded youtube video.
+  
   - 0.0.2.35
     Change the image of button "VideoPins".
     It's will resize the video when resize the pop-up window.

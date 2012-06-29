@@ -21,6 +21,12 @@ VideoPins.prototype =
         return this.pluginObj.HookWindow(this.getClassName(), title, x, y, width, height);
 	},
 
+	UnHookWindow :
+	function(hWnd)
+	{
+		return false;
+	},
+
 	getClassName :
 	function()
 	{

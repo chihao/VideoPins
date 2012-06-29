@@ -1,20 +1,13 @@
 {
     "name": "__MSG_name__",
-    "version": "0.0.2.35",
+    "version": "0.0.2.4",
     "default_locale": "en",
     "description": "__MSG_description__",
     "background_page": "background.html",
     "options_page": "options.html",
     "update_url": "http://clients2.google.com/service/update2/crx",
-    "permissions":
-    [
-        "tabs",
-        "http://*.youtube.com/*",
-        "http://youtube.com/*",
-        "https://*.youtube.com/*",
-        "https://youtube.com/*"
-    ],
-    
+    "converted_from_user_script": true,
+    "permissions": ["tabs"],    
     "plugins":
     [
         { "path": "plugin/npVideoPins.so" },
@@ -25,7 +18,14 @@
     [
         {
             "matches": ["http://*.youtube.com/*", "http://youtube.com/*", "https://*.youtube.com/*", "https://youtube.com/*"],
-            "js": ["/js/jquery-1.7.1.min.js", "content_script.js"],
+            "js": ["/js/jquery-1.7.1.min.js", "/js/content_scripts/youtube.js"],
+            "run_at": "document_idle"
+        },
+        {
+
+            "include_globs": [ "http://*.youtube.com/embed/*", "http://youtube.com/embed/*", "https://*.youtube.com/embed/*", "https://youtube.com/embed/*" ],
+            "matches": ["http://*/*", "https://*/*"],
+            "js": ["/js/jquery-1.7.1.min.js", "/js/content_scripts/embed/youtube_embed.js"],
             "run_at": "document_idle"
         }
     ],
