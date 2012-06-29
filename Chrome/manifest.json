@@ -7,10 +7,10 @@
     "options_page": "options.html",
     "update_url": "http://clients2.google.com/service/update2/crx",
     "converted_from_user_script": true,
-    "permissions": ["tabs"],    
+    "permissions": ["tabs", "https://gdata.youtube.com/feeds/api/videos/*"],    
     "plugins":
     [
-        { "path": "plugin/npVideoPins.so" },
+        { "path": "plugin/npVideoPins.so"  },
         { "path": "plugin/npVideoPins.dll" }
     ],   
     
@@ -19,15 +19,20 @@
         {
             "matches": ["http://*.youtube.com/*", "http://youtube.com/*", "https://*.youtube.com/*", "https://youtube.com/*"],
             "js": ["/js/jquery-1.7.1.min.js", "/js/content_scripts/youtube.js"],
-            "run_at": "document_idle"
+            "run_at": "document_end"
         },
         {
-
-            "include_globs": [ "http://*.youtube.com/embed/*", "http://youtube.com/embed/*", "https://*.youtube.com/embed/*", "https://youtube.com/embed/*" ],
+            "include_globs": [ "http://*.youtube.com/embed/*", "http://youtube.com/embed/*", "https://*.youtube.com/embed/*", "https://youtube.com/embed/*"],
             "matches": ["http://*/*", "https://*/*"],
             "css": ["/css/www-core-vflDwxflm.css"],
             "js": ["/js/jquery-1.7.1.min.js", "/js/content_scripts/embed/youtube_embed.js"],
-            "run_at": "document_idle"
+            "run_at": "document_end"
+        },
+        {
+            "matches": ["http://*/*", "https://*/*"],
+            "css": ["/css/www-core-vflDwxflm.css"],
+            "js": ["/js/jquery-1.7.1.min.js", "/js/content_scripts/embed/youtube_embed_old.js"],
+            "run_at": "document_end"
         }
     ],
   

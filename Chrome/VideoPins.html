@@ -76,9 +76,8 @@
         var bg_page = chrome.extension.getBackgroundPage();
         var obj = JSON.parse(localStorage['video']);
 
-        document.title = obj.title;        
+        document.title = obj.title;
         document.getElementById('video').innerHTML = obj.html;
-        
         
         window.onload = function()
         {	// after page onloaded.
@@ -97,8 +96,10 @@
                     
                     bg_page.Pins.add(window.id, newPin);
                 });
-        }        
+        }
+        
     </script>
 
 </body>
 </html>
+<!--<div class="-cx-PRIVATE-uiInlineBlock__root shareRedesignVideo shareRedesignMedia -cx-PRIVATE-uiImageBlock__image  lfloat swfObject" id="u5qzo9_155" data-swfid="swf_u5qzo9_155"><iframe width="358" height="220" frameborder="0" src="https://s-static.ak.facebook.com/common/referer_frame.php"></iframe></div>-->

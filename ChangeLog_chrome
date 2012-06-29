@@ -1,6 +1,6 @@
 change log:
   - 0.0.2.4
-    Support embedded youtube video.
+    Support embedded youtube video with old format(Object) and iframe.
   
   - 0.0.2.35
     Change the image of button "VideoPins".
