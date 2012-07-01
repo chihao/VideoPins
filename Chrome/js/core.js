@@ -1,0 +1,47 @@
+function getType(url)
+{
+	return '';
+}
+
+function getYoutubeEmbedLink(id)
+{    
+    //"<iframe width='420' height='315' src=\"http://www.youtube.com/embed/k0BWlvnBmIE\" frameborder='0' allowfullscreen></iframe>"
+    /*
+    var id = getYoutubeId(url);
+    if(id==null)
+        var src = url;
+    else
+      */
+    var src = "http://www.youtube.com/embed/"+id+"?autoplay=1";
+
+    var ret = '<iframe src="'+src+'#" frameborder allowfullscreen></iframe>';
+    return ret;
+}
+
+function getYoutubeId(url)
+{
+    var reg = new RegExp('(?:https?://)?(?:www\\.)?(?:youtu\\.be/|youtube\\.com(?:/embed/|/v/|/watch\\?v=))([\\w-]{10,12})', 'g');
+    var temp = reg.exec(url);
+    return (temp)? temp[1] : null;
+}
+
+function getEmbedButton()
+{
+	var ret = '<button type="button" id="VideoPins_btn" class="yt-uix-tooltip-reverse yt-uix-button yt-uix-button-default yt-uix-tooltip" title="'+chrome.i18n.getMessage('tooltip')+'" data-tooltip-text="'+chrome.i18n.getMessage('tooltip')+'">\
+              		<span class="yt-uix-button-content">\
+                    	<img class="addto-label" src="'+chrome.extension.getURL('/images/icon.png')+'" alt="'+chrome.i18n.getMessage('tooltip')+'">' + 
+                    '</span>\
+               </button>';
+    return ret;
+}
+
+/*
+function IncludeJQ()
+{
+    var jq = document.createElement('script');
+    jq.setAttribute('type', 'text/javascript');
+    jq.setAttribute('src', 'http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js');
+    document.body.appendChild(jq);
+    alert(1);
+}
+*/

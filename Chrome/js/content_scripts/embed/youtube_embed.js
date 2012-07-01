@@ -1,39 +1,39 @@
-console.log(window.location.href);
 
-if(window.location.href.indexOf("#")<0)
+if(window.location.href.indexOf("#")<0 && typeof $("body").find("#VideoPins_btn")[0] == "undefined")
 {
-    $("body").append('<button type="button" id="videopins_pin" class="yt-uix-tooltip-reverse yt-uix-button yt-uix-button-default yt-uix-tooltip" title="'+chrome.i18n.getMessage('tooltip')+'" data-tooltip-text="'+chrome.i18n.getMessage('tooltip')+'">\
-                          <span class="yt-uix-button-content">\
-                              <img class="addto-label" src="'+chrome.extension.getURL('/images/icon.png')+'" alt="'+chrome.i18n.getMessage('tooltip')+'">' + 
-                          '</span>\
-                      </button>');
+    var YoutubeId = getYoutubeId(window.location.href);
 
-    $('#videopins_pin').css({
+    $("body").append(getEmbedButton());
+ 
+    $('#VideoPins_btn').css({
         top: '260px',
         right: '0px',
         position: "fixed",
         zIndex: '999'
     });
 
-	$('#videopins_pin').click(function(){
-	    /* do somtthing */    
-        var obj = new Object();
-            obj.title = document.title;
-            obj.src = window.location.href;
+  	$('#VideoPins_btn').click(function(){
+        $.get("https://gdata.youtube.com/feeds/api/videos/"+YoutubeId,
+            function(xml){
+                var obj = new Object();
+                obj.title = $(xml).find('title').text();
+                obj.type  = getType(window.location.href);
+                obj.id    = getYoutubeId(window.location.href);
+                
+                chrome.extension.sendRequest({request: "openWindow", value: obj});
+            }, "xml");
+  	    return false;
+  	});
 
-        chrome.extension.sendRequest({request: "openWindow", value: obj});
-	    return false;
-	});
-
-	$("body").hover(function(){
-        $('#videopins_pin').animate({
-            right: '0px'
-          }, 300 );
-	}, function(){
-        var width = $('#videopins_pin')[0].offsetWidth;
-        $('#videopins_pin').animate({
-            right: -width + 'px'
-          }, 300 );
+  	$("body").hover(function(){
+          $('#VideoPins_btn').animate({
+              right: '0px'
+            }, 300 );
+  	}, function(){
+          var width = $('#VideoPins_btn')[0].offsetWidth;
+          $('#VideoPins_btn').animate({
+              right: -width + 'px'
+            }, 300 );
     });
 }
 

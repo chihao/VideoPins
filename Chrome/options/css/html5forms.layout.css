@@ -1,0 +1,116 @@
+/*
+ * HTML5 Forms Fallback for older and unsupporting browsers
+ * Using jQuery, jQuery UI, Modernizr, Webforms2, and other jQuery Plugins
+ * 
+ * 2010 Cristian I. Colceriu
+ *
+ * www.ghinda.net
+ * contact@ghinda.net
+ *
+ * Stylesheet for demo page
+ *
+ */
+
+html {
+	background-color: #333;
+	margin: 0px;
+	padding: 0px;
+}
+body {
+	width: 500px;
+	padding: 20px;
+	margin: 10px auto;
+	background-color: #eee;
+	
+	font-family: Helvetica, Arial, sans-serif;
+	color: #333;
+	
+	-moz-box-shadow: 0px 0px 10px #000;
+}
+h1 {
+	padding: 20px;
+	margin: -20px -20px 20px -20px;
+	border-bottom: 1px solid #558199;
+	
+	background-color: #B5DCF1;
+	background-image: -moz-linear-gradient(top, #B5DCF1, #83B0C9); /* FF3.6 */
+	background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #B5DCF1),color-stop(1, #83B0C9)); /* Saf4+, Chrome */
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#B5DCF1', EndColorStr='#83B0C9'); /* IE6,IE7 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#B5DCF1', EndColorStr='#83B0C9')"; /* IE8 */
+	
+	color: #313131;
+	text-shadow: 0px 1px 0px #CAE9F9;
+	
+	-moz-box-shadow: 0px 1px 0px #fff;
+	-webkit-box-shadow: 0px 1px 0px #fff;
+	box-shadow: 0px 1px 0px #fff;
+}
+h1 span {
+	font-size: 14px;
+	display: block;
+}
+h1 a {
+	color: #000;
+}
+footer {
+	display: block;
+	padding-top: 20px;
+	margin: 20px -20px -20px -20px;
+	background-color: #C4C3C4;
+
+	font-size: 70%;
+}
+footer p {
+	padding: 0px 20px 0px 20px;
+	margin: 0px;
+}
+.author {
+	padding: 10px 20px;
+
+	text-align: right;
+}
+.clearfix {
+	clear: both;
+}
+/* General forms */
+form {
+	overflow: hidden;
+	clear: both;
+	width: 490px;
+}
+label{
+	clear: left;
+	float: left;
+	width: 41%;
+	padding-right: 2%;
+	height: 1em;
+	margin-bottom: 10px;
+	
+	text-align: right;
+}
+input{
+	float: left;
+	height: 1em;	
+	margin-bottom: 15px;
+}
+button {
+	float: left;
+	clear: both;
+	margin-left: 43%;
+	
+	display: inline;
+}
+/* Placerholder */
+.placeholder {
+	color: #aaa;
+}
+/* Slider */
+.slider {
+	float: left;	
+    width: 49%;
+	margin: 10px 0px 20px 10px;
+}
+/* Spinner */
+.ui-spinner {
+	float: left;
+}

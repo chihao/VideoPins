@@ -1,13 +1,18 @@
 {
     "name": "__MSG_name__",
-    "version": "0.0.2.4",
+    "version": "0.0.2.45",
     "default_locale": "en",
     "description": "__MSG_description__",
     "background_page": "background.html",
     "options_page": "options.html",
     "update_url": "http://clients2.google.com/service/update2/crx",
-    "converted_from_user_script": true,
-    "permissions": ["tabs", "https://gdata.youtube.com/feeds/api/videos/*"],    
+
+    "permissions": 
+    [
+        "tabs",
+        "http://*/*"
+    ],
+
     "plugins":
     [
         { "path": "plugin/npVideoPins.so"  },
@@ -18,20 +23,21 @@
     [
         {
             "matches": ["http://*.youtube.com/*", "http://youtube.com/*", "https://*.youtube.com/*", "https://youtube.com/*"],
-            "js": ["/js/jquery-1.7.1.min.js", "/js/content_scripts/youtube.js"],
+            "js": ["/js/jquery-1.7.2.min.js", "/js/core.js", "/js/content_scripts/youtube.js"],
             "run_at": "document_end"
         },
         {
-            "include_globs": [ "http://*.youtube.com/embed/*", "http://youtube.com/embed/*", "https://*.youtube.com/embed/*", "https://youtube.com/embed/*"],
+            "all_frames": true,
+            "include_globs": ["http://*.youtube.com/embed/*", "http://youtube.com/embed/*", "https://*.youtube.com/embed/*", "https://youtube.com/embed/*",
+                              "http://*.youtube.com/v/*", "http://youtube.com/v/*", "https://*.youtube.com/v/*", "https://youtube.com/v/*"],
             "matches": ["http://*/*", "https://*/*"],
-            "css": ["/css/www-core-vflDwxflm.css"],
-            "js": ["/js/jquery-1.7.1.min.js", "/js/content_scripts/embed/youtube_embed.js"],
+            "js": ["/js/jquery-1.7.2.min.js", "/js/core.js", "/js/content_scripts/embed/youtube_embed.js"],
             "run_at": "document_end"
         },
         {
+            "exclude_globs": [ "http://*.youtube.com/*", "http://youtube.com/*", "https://*.youtube.com/*", "https://youtube.com/*"],
             "matches": ["http://*/*", "https://*/*"],
-            "css": ["/css/www-core-vflDwxflm.css"],
-            "js": ["/js/jquery-1.7.1.min.js", "/js/content_scripts/embed/youtube_embed_old.js"],
+            "js": ["/js/jquery-1.7.2.min.js", "/js/core.js", "/js/content_scripts/embed/youtube_embed_old.js"],
             "run_at": "document_end"
         }
     ],

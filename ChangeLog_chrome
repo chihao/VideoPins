@@ -1,4 +1,9 @@
 change log:
+  - 0.0.2.45
+    Change icon.
+    Support more kind embedded youtube video.
+    Add auto play.
+
   - 0.0.2.4
     Support embedded youtube video with old format(Object) and iframe.
   
