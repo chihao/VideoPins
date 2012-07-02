@@ -27,7 +27,7 @@ FB::variant VideoPinsAPI::echo(const FB::variant& msg)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn FB::variant VideoPinsAPI::echo(const FB::variant& msg)
+/// @fn FB::variant VideoPinsAPI::HookWindow(const std::string classN, const std::string title, const int x, const int y, const int width, const int height)
 ///
 /// @brief  Echos whatever is passed from Javascript.
 ///         Go ahead and change it. See what happens!
@@ -55,7 +55,43 @@ FB::variant VideoPinsAPI::HookWindow(const std::string classN, const std::string
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn FB::variant VideoPinsAPI::echo(const FB::variant& msg)
+/// @fn FB::variant VideoPinsAPI::ReHookWindow(const int windowId)
+///
+/// @brief  Echos whatever is passed from Javascript.
+///         Go ahead and change it. See what happens!
+///////////////////////////////////////////////////////////////////////////////
+int VideoPinsAPI::ReHookWindow(const int windowId)
+{
+    Window activate = windowId;
+    Display *disp = XOpenDisplay(NIL);
+    char opt[] = "add,above";
+
+    int ret = window_state(disp, activate, opt);
+    XCloseDisplay(disp);
+
+    return ret;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn FB::variant VideoPinsAPI::UnHookWindow(const int windowId)
+///
+/// @brief  Echos whatever is passed from Javascript.
+///         Go ahead and change it. See what happens!
+///////////////////////////////////////////////////////////////////////////////
+int VideoPinsAPI::UnHookWindow(const int windowId)
+{
+    Window activate = windowId;
+    Display *disp = XOpenDisplay(NIL);
+    char opt[] = "remove,above";
+
+    int ret = window_state(disp, activate, opt);
+    XCloseDisplay(disp);
+
+    return ret;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn FB::variant VideoPinsAPI::Xtest(const std::string classN, const std::string title)
 ///
 /// @brief  Echos whatever is passed from Javascript.
 ///         Go ahead and change it. See what happens!

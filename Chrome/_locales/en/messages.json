@@ -9,5 +9,13 @@
    
    "tooltip": {
         "message": "Pop-up"
+   },
+
+   "opt_autoplay": {
+   		"message": "Auto play"
+   },
+
+   "opt_test": {
+   		"message": "Test"
    }
 }

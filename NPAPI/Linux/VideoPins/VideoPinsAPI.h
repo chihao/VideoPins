@@ -69,6 +69,8 @@ public:
     {
         registerMethod("echo",      make_method(this, &VideoPinsAPI::echo));
         registerMethod("HookWindow", make_method(this, &VideoPinsAPI::HookWindow));
+        registerMethod("ReHookWindow", make_method(this, &VideoPinsAPI::ReHookWindow));
+        registerMethod("UnHookWindow", make_method(this, &VideoPinsAPI::UnHookWindow));
         registerMethod("Xtest", make_method(this, &VideoPinsAPI::Xtest));
         registerMethod("testEvent", make_method(this, &VideoPinsAPI::testEvent));
         
@@ -107,6 +109,8 @@ public:
 
     // Method HookWindow
     FB::variant HookWindow(const std::string classN, const std::string title, const int x, const int y, const int width, const int height);
+    int ReHookWindow(const int windowId);
+    int UnHookWindow(const int windowId);
     
     // Method Xtest
     FB::variant Xtest(const std::string classN, const std::string title);

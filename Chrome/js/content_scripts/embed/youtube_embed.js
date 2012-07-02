@@ -36,4 +36,3 @@ if(window.location.href.indexOf("#")<0 && typeof $("body").find("#VideoPins_btn"
             }, 300 );
     });
 }
-

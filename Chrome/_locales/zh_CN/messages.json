@@ -9,5 +9,13 @@
    
    "tooltip": {
         "message": "置顶"
+   },
+
+   "opt_autoplay": {
+   		"message": "自动播放"
+   },
+
+   "opt_test": {
+   		"message": "测试"
    }
 }

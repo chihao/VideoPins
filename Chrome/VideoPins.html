@@ -10,7 +10,7 @@
         width: 100%;
         height: 100%;
     }
-    #video
+    #VideoPins_Player
     {
         width: 100%;
         height: 100%;
@@ -27,28 +27,72 @@
 </style>
 
 <script type="text/javascript" src="VideoPins.js"></script>
-<!-- <script type="text/javascript" src="http://www.youtube.com/player_api"></script> -->
-<script>
-    /*
-    var player;
+<script type="text/javascript" src="http://www.youtube.com/player_api"></script>
+<script>    
+    var bg_page = chrome.extension.getBackgroundPage();    
+    var obj = JSON.parse(localStorage['video']);
+    var m_Pin = null;
+    var hWnd = null;
+    var ytplayer = null;
+
     function onYouTubePlayerAPIReady()
     {
-        player = new YT.Player('player', {
-          height: '390',
-          width: '640',
-          videoId: 'u1zgFlCw8Aw',
-          events: {
-            'onStateChange': onPlayerStateChange
-          }
+        ytplayer = new YT.Player('ytplayer', {
+            events  : {
+                'onReady': onPlayerReady,
+                'onPlaybackQualityChange': onPlayerPlaybackQualityChange,
+                'onStateChange': onPlayerStateChange,
+                'onError': onPlayerError
+            }
         });
+    }
+
+    function onPlayerReady(event)
+    {
+        var autoplay = bg_page.options['autoplay'].value;
+        if(autoplay) ytplayer.playVideo();
+    }
+
+    function onPlayerPlaybackQualityChange(event)
+    {
     }
 
     function onPlayerStateChange(event)
     {
-        if (event.data == YT.PlayerState.PAUSED) alert("paused");
-        if (event.data == YT.PlayerState.CUED) alert("cued");
+        switch(event.data)
+        { //unstarted (-1), ended (0), playing (1), paused (2), buffering (3), video cued (5). 
+        case YT.PlayerState.UNSTARTED:
+            console.log("UNSTARTED");
+            break;
+
+        case YT.PlayerState.ENDED:
+            console.log("ENDED");
+            break;
+
+        case YT.PlayerState.PLAYING:
+            console.log("PLAYING");
+            m_Pin.ReHookWindow(hWnd);
+            break;
+
+        case YT.PlayerState.PAUSED:
+            console.log("PAUSED");
+            // var hWnd = bg_page.Pins.gethWnd(obj.title);
+            m_Pin.UnHookWindow(hWnd);
+            break;
+
+        case YT.PlayerState.BUFFERING:
+            console.log("BUFFERING");
+            break;
+
+        case YT.PlayerState.CUED:
+            console.log("CUED");
+            break;
+        }
     }
-    */
+
+    function onPlayerError(event)
+    {
+    }
     
     // document.onclick = getMousePosition;
     function getMousePosition(e) 
@@ -61,25 +105,19 @@
 </script>
 </head>
 <body>
-    <!--<iframe width="560" height="315" src="http://www.youtube.com/embed/Qla_Q5X2M5I" frameborder="0" allowfullscreen></iframe>-->
-    <!--<iframe width="560" height="315" src="http://www.youtube.com/embed/0EdaKlqIwPU" frameborder="0" allowfullscreen></iframe>-->
-
-    <div id="video"></div>
+    <div id="VideoPins_Player"></div>
 
     <embed id="embedVideoPins" type="application/x-videopins">
     <script type="text/javascript">
-        var bg_page = chrome.extension.getBackgroundPage();
-        var obj = JSON.parse(localStorage['video']);
-
         document.title = obj.title;
-        document.getElementById('video').innerHTML = obj.html;
+        document.getElementById('VideoPins_Player').innerHTML = obj.html;
         
         window.onload = function()
         {	// after page onloaded.
-            var m_Pin = new VideoPins(document.getElementById("embedVideoPins"));
+            m_Pin = new VideoPins(document.getElementById("embedVideoPins"));
             
             // windows XP offset: width=10, height=27. correct=650,418.
-            var hWnd = m_Pin.HookWindow(document.title, obj.x, obj.y, obj.width+bg_page.OS_windowOffsetW, obj.height+bg_page.OS_windowOffsetH);
+            hWnd = m_Pin.HookWindow(document.title, obj.x, obj.y, obj.width+bg_page.OS_windowOffsetW, obj.height+bg_page.OS_windowOffsetH);
 
             chrome.windows.getCurrent(
                 function(window)
