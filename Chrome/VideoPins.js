@@ -1,6 +1,7 @@
 function VideoPins(obj)
 {
     this.pluginObj = obj;
+    this.hWnd = null;
 }
 
 VideoPins.prototype = 
@@ -16,19 +17,22 @@ VideoPins.prototype =
                     "y:" + y + '\n' + 
                     "width:" + width + '\n' + 
                     "height:" + height);
-        
-        return this.pluginObj.HookWindow(this.getClassName(), title, x, y, width, height);
+
+        this.hWnd = this.pluginObj.HookWindow(this.getClassName(), title, x, y, width, height);
+        return this.hWnd;
     },
 
     ReHookWindow :
     function(hWnd)
     {
+        hWnd = (typeof hWnd === "undefined")? this.hWnd : hWnd;
         return this.pluginObj.ReHookWindow(hWnd);
     },
 
     UnHookWindow :
     function(hWnd)
     {
+        hWnd = (typeof hWnd === "undefined")? this.hWnd : hWnd;
         return this.pluginObj.UnHookWindow(hWnd);
     },
 

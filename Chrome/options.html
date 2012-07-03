@@ -3,63 +3,7 @@
         <title>VideoPins Options</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link type="text/css" href="css/redmond/jquery-ui-1.8.21.custom.css" rel="stylesheet" />
-        <style>
-            body
-            {
-                font-family: Helvetica, Arial, sans-serif;
-                background-color: #333;
-            }
-
-            #options
-            {
-                margin-top: 5%;
-            	margin-left: 35%;
-                padding-bottom: 10px;
-                width: 30%;
-                display: block;                
-                background-color: #EEE;
-            }
-
-            h1
-            {
-                padding: 20px 30px 20px 30px;
-                background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #B5DCF1),color-stop(1, #83B0C9));                
-                border-bottom-style: solid;                
-                border-width: 1px;
-                border-color: black;
-            }
-
-            form
-            {
-                padding-left: 8%;
-            }
-
-            label.title
-            {
-                top: -10px;
-                position: relative;
-                margin-left: 5%;
-                color: #fff;
-                background: #AAA;
-                border: 1px solid #781351;
-                padding: 2px 6px
-            }
-
-            li
-            {
-                font-size: 1.1em;
-                margin: 5px 0px 5px 0px;
-                list-style-image: none;
-                list-style: none;
-                list-style-type: none;
-            }
-
-            .ui-icon-custom
-            {
-                background-position: 3px 3px;
-                background-image: url(images/icon.png) !important;
-            }
-        </style>
+        <link type="text/css" href="css/options.css" rel="stylesheet" />
 
         <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui-1.8.21.custom.min.js"></script>
@@ -69,14 +13,55 @@
             function GenerateForm()
             {
         		var container = $('ul#option-items');
-                var items = bg_page.options;
+                var items = bg_page.Options.get();
 
                 for(var i in items)
                 {
                     var item = items[i];
 
-                    container.append(
-                        $(document.createElement("li"))
+                    switch(item.type)
+                    {
+                    case 'checkbox':
+                        container.append(GenerateCheckBox(item));
+                        break;
+                    
+                    case 'position':
+                        $(function(){
+                            /* Set label */
+                            $("#option-pos-label").text(chrome.i18n.getMessage('opt_'+item.key));
+                            $("#option-pos-label-value").text(chrome.i18n.getMessage('opt_pos'+item.value));
+                            
+                            /* Set default checked */
+                            var $radios = $('input:radio[name=pos]');
+                            if($radios.is(':checked') === false) {
+                                $radios.filter('[value='+item.value+']').attr('checked', true);
+                            }
+
+                            /* Set radios */
+                            $("#option-pos").buttonset();
+                            $("#option-pos label").addClass('ui-corner-all');
+                            $("#option-pos .pos").button({
+                                icons: {
+                                    primary: "ui-icon-block"
+                                },
+                                text: false})
+                                .click(function(event)
+                                {
+                                    var value = $(this)[0].value;
+                                    bg_page.Options.set("position", value);
+                                    $("#option-pos-label-value").text(chrome.i18n.getMessage('opt_pos'+value));
+                                });
+                        });
+                        break;
+                    }
+                }
+
+                $("#version").text(chrome.i18n.getMessage("version")+":"+chrome.app.getDetails().version);
+			}
+
+            function GenerateCheckBox(item)
+            {
+                return $(document.createElement("li"))
                         .append(
                             $(document.createElement("input")).attr({
                                 id      : 'option-' + item.key,
@@ -88,8 +73,8 @@
                             .click(function(event)
                             {
                                 var cbox = $(this)[0];
-                                bg_page.option_set(cbox.name, cbox.checked);
-                                bg_page.option_save();
+                                bg_page.Options.set(cbox.name, cbox.checked);
+                                // bg_page.option_save();
                             })
                         )
                         .append(
@@ -97,95 +82,40 @@
                                 'for':  'option-' + item.key
                             })
                             .text( chrome.i18n.getMessage('opt_'+item.key) )
-                        )
-                    );
-                }
-/*
-				$.each( bg_page.options, function( index, item )
-				{
-                    alert(index);
-				    container.append(
-				        $(document.createElement("li"))
-				        .append(
-			                $(document.createElement("input")).attr({
-		                        id      : 'option-' + item.key,
-		                        name    : item.key,
-		                        value   : item.value,
-		                        type    : 'checkbox',
-		                        checked : item.value
-			                })
-			                .click(function(event)
-			                {
-		                        var cbox = $(this)[0];
-                                // bg_page.options[index][cbox.value] = 
-                                alert(bg_page.options[cbox.name].key);
-                                bg_page.option_save();
-		                        // alert( cbox.value );
-			                })
-				        )
-				        .append(
-			                $(document.createElement('label')).attr({
-		                        'for':  'option-' + item.key
-			                })
-			                .text( chrome.i18n.getMessage('opt_'+item.key) )
-				        )
-				    )
-				});
-*/
-			}
-        </script>
-
-        <script type="text/javascript">
-            /*
-            $(function(){
-                // Button
-                $("#button").button();
-
-                $("#icon").button({
-                    icons: {
-                        primary: "ui-icon-custom"
-                    },
-                    text: false});
-
-                $("#icon_checkbox").button({
-                    icons: {
-                        primary: "ui-icon-custom"
-                    },
-                    text: false});
-
-                $("#check").button();            
-
-                $("#radioset").buttonset();
-            });
-            */
+                        );
+            }
         </script>
     </head>
     <body onload="GenerateForm();">
         <div id="options">
-        	<h1>VideoPins Options.</h1>
+        	<header>
+                <h1>VideoPins Options.</h1>
+            </header>
+
             <form>
                 <!--<label class="title">test</label>-->
-            	<ul id="option-items">
-            	</ul>
+            	<ul id="option-items"></ul>
+                <hr/>
+                <div id="option-pos">
+                    <label id="option-pos-label"></label>
+                    <center>
+                    <label id="option-pos-label-value" style="font-weight:bold;"></label>
+                    <table class="ui-corner-all">
+                        <tr><td>
+                        <input type="radio" id="pos0" class="pos" value="0" name="pos" /><label for="pos0">Choice 0</label></td><td></td><td>
+                        <input type="radio" id="pos1" class="pos" value="1" name="pos" /><label for="pos1">Choice 1</label></td></tr><tr><td></td>
+                        <td class="middle">
+                        <input type="radio" id="pos2" class="pos" value="2" name="pos" /><label for="pos2">Choice 2</label></td><td></td></tr><tr><td>
+                        <input type="radio" id="pos3" class="pos" value="3" name="pos" /><label for="pos3">Choice 3</label></td><td></td><td>
+                        <input type="radio" id="pos4" class="pos" value="4" name="pos" /><label for="pos4">Choice 4</label></td></tr>
+                    </table>
+                    </center>
+                </div>
             </form>
+            
+            <footer>
+                <p id="version"></p>
+            </footer>
         </div>
-
-        <!-- Button -->
-    <!--
-        <h2 class="demoHeaders">Button</h2>
-        <button id="button">A button element</button>
-        <button id="icon">Button with icon only</button>
-        
-        <input type="checkbox" id="icon_checkbox" /><label for="icon_checkbox">Toggle</label>
-        <input type="checkbox" id="check" /><label for="check">Toggle</label>
-
-        <form style="margin-top: 1em;">
-            <div id="radioset">
-                <input type="radio" id="radio1" name="radio" /><label for="radio1">Choice 1</label>
-                <input type="radio" id="radio2" name="radio" checked="checked" /><label for="radio2">Choice 2</label>
-                <input type="radio" id="radio3" name="radio" /><label for="radio3">Choice 3</label>
-            </div>
-        </form>
-    -->
     </body>
 </html>

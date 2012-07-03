@@ -32,7 +32,6 @@
     var bg_page = chrome.extension.getBackgroundPage();    
     var obj = JSON.parse(localStorage['video']);
     var m_Pin = null;
-    var hWnd = null;
     var ytplayer = null;
 
     function onYouTubePlayerAPIReady()
@@ -49,7 +48,7 @@
 
     function onPlayerReady(event)
     {
-        var autoplay = bg_page.options['autoplay'].value;
+        var autoplay = bg_page.Options.get("autoplay");
         if(autoplay) ytplayer.playVideo();
     }
 
@@ -67,17 +66,17 @@
 
         case YT.PlayerState.ENDED:
             console.log("ENDED");
+            m_Pin.ReHookWindow();
             break;
 
         case YT.PlayerState.PLAYING:
             console.log("PLAYING");
-            m_Pin.ReHookWindow(hWnd);
+            m_Pin.ReHookWindow();
             break;
 
         case YT.PlayerState.PAUSED:
             console.log("PAUSED");
-            // var hWnd = bg_page.Pins.gethWnd(obj.title);
-            m_Pin.UnHookWindow(hWnd);
+            m_Pin.UnHookWindow();
             break;
 
         case YT.PlayerState.BUFFERING:
@@ -117,7 +116,7 @@
             m_Pin = new VideoPins(document.getElementById("embedVideoPins"));
             
             // windows XP offset: width=10, height=27. correct=650,418.
-            hWnd = m_Pin.HookWindow(document.title, obj.x, obj.y, obj.width+bg_page.OS_windowOffsetW, obj.height+bg_page.OS_windowOffsetH);
+            var hWnd = m_Pin.HookWindow(document.title, obj.x, obj.y, obj.width+bg_page.OS_windowOffsetW, obj.height+bg_page.OS_windowOffsetH);
 
             chrome.windows.getCurrent(
                 function(window)

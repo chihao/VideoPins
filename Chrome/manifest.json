@@ -1,12 +1,12 @@
 {
     "name": "__MSG_name__",
-    "version": "0.0.2.5",
+    "version": "0.0.2.511",
     "default_locale": "en",
     "description": "__MSG_description__",
     "background_page": "background.html",
     "options_page": "options.html",
     "update_url": "http://clients2.google.com/service/update2/crx",
-
+    
     "permissions": 
     [
         "tabs",

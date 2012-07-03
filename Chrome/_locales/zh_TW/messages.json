@@ -1,21 +1,49 @@
 {
 	"name": {
-        "message": "VideoPins"
+      "message":"VideoPins"
 	},
+
+  "version": {
+      "message": "版本"
+  },
     
-    "description": {
-        "message": "在置頂的彈出式視窗中播放影片。"
-   },
+  "description": {
+      "message":"在置頂的彈出式視窗中播放影片。"
+  },
    
-   "tooltip": {
-        "message": "置頂"
-   },
+  "tooltip": {
+      "message":"置頂"
+  },
 
-   "opt_autoplay": {
-   		"message": "自動播放"
-   },
+  "opt_autoplay": {
+      "message":"自動播放"
+  },
 
-   "opt_test": {
-   		"message": "測試"
-   }
+  "opt_position": {
+      "message":"彈出式視窗位置："
+  },
+
+  "opt_pos0": {
+      "message":"左上"
+  },
+
+  "opt_pos1": {
+      "message":"右上"
+  },
+
+  "opt_pos2": {
+      "message":"中央"
+  },
+
+  "opt_pos3": {
+      "message":"左下"
+  },
+
+  "opt_pos4": {
+      "message":"右下"
+  },
+
+  "opt_test": {
+      "message":"測試"
+  }
 }

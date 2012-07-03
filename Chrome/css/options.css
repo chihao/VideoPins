@@ -1,0 +1,108 @@
+body
+{
+    font-family: Helvetica, Arial, sans-serif;
+    background-color: #333;
+}
+
+#options
+{
+    margin-top: 5%;
+	margin-left: 30%;
+    width: 40%;
+    display: block;
+    background-color: #EEE;
+}
+
+header
+{
+    padding: 10px 20px 10px 20px;
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #B5DCF1),color-stop(1, #83B0C9));                
+    border-bottom-style: solid;                
+    border-width: 1px;
+    border-color: black;
+}
+
+footer
+{
+    padding: 10px;
+}
+
+form
+{
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+label.title
+{
+    top: -25px;
+    position: relative;
+    margin-left: 3%;
+    color: black;
+    background: #EEE;
+    /*border: 1px solid #781351;*/
+    padding: 2px 6px
+}
+
+ul
+{
+    padding-left: 10px;
+}
+
+li
+{
+    font-size: 1.1em;
+    margin: 5px 0px 5px 0px;
+    list-style-image: none;
+    list-style: none;
+    list-style-type: none;
+}
+
+#option-pos
+{
+    margin-top: 0px;
+    padding: 15px;
+    /*border: 1px solid black;*/
+    /*background-color: #ABC;*/
+}
+
+#option-pos table
+{
+    margin-top: 10px;
+    padding: 0px 5px 0px 0px;
+    border: 10px double #777;
+    background-color: #BABACB;
+    /*background-color: #DCDCED;*/
+}
+
+#option-pos td.middle
+{
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+#version
+{
+    margin: 0px;
+    text-align: right;
+    position: relative;
+}
+
+.ui-icon-custom
+{
+    background-position: 3px 3px;
+    background-image: url(../images/icon.png) !important;
+}
+
+.ui-icon-block
+{
+    background-image: url(../images/block.png) !important;
+}
+
+/* Override jquery ui .ui-state-active */
+.ui-state-active
+{
+    border: 1px solid #79b7e7;
+    background: #f5f8f9 url(../../images/icon.png) 50% 50% no-repeat;
+    font-weight: bold; color: #e17009;
+}

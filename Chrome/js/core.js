@@ -5,9 +5,7 @@ function getType(url)
 
 function getYoutubeEmbedLink(id)
 {    
-    //"<iframe width='420' height='315' src=\"http://www.youtube.com/embed/k0BWlvnBmIE\" frameborder='0' allowfullscreen></iframe>"
     var bg_page = chrome.extension.getBackgroundPage();
-    var autoplay = bg_page.options['autoplay'].value;
 
     var src = "http://www.youtube.com/embed/"+id;
     var ret = '<iframe id="ytplayer" type="text/html" \

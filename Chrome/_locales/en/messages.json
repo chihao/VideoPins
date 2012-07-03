@@ -1,21 +1,49 @@
 {
-	"name": {
-        "message": "VideoPins"
-	},
+  "name": {
+      "message": "VideoPins"
+  },
+
+  "version": {
+      "message": "Version"
+  },
     
-    "description": {
-        "message": "Play the video in the 'Always on Top' of the pop-up window."
-   },
+  "description": {
+      "message": "Play the video in the 'Always on Top' of the pop-up window."
+  },
    
-   "tooltip": {
-        "message": "Pop-up"
-   },
+  "tooltip": {
+      "message": "Pop-up"
+  },
 
-   "opt_autoplay": {
-   		"message": "Auto play"
-   },
+  "opt_autoplay": {
+      "message": "Auto play"
+  },
 
-   "opt_test": {
-   		"message": "Test"
-   }
+  "opt_position": {
+      "message": "Pop-up window position: "
+  },
+
+  "opt_pos0": {
+      "message": "On the top left."
+  },
+
+  "opt_pos1": {
+      "message": "On the top right."
+  },
+
+  "opt_pos2": {
+      "message": "Center."
+  },
+
+  "opt_pos3": {
+      "message": "On the bottom left."
+  },
+
+  "opt_pos4": {
+      "message": "On the bottom right."
+  },
+
+  "opt_test": {
+      "message": "Test"
+  }
 }
