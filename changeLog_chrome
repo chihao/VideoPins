@@ -1,0 +1,26 @@
+change log:
+  - 0.0.2.5
+    Use YouTube API.
+    Add option page.
+    Disable "Always on top" when video pasued (for linux).
+
+  - 0.0.2.45
+    Change icon.
+    Support more kind embedded youtube video.
+    Add auto play.
+
+  - 0.0.2.4
+    Support embedded youtube video with old format(Object) and iframe.
+  
+  - 0.0.2.35
+    Change the image of button "VideoPins".
+    It's will resize the video when resize the pop-up window.
+    VideoPins plugin will return pop-up window id(hWnd).
+
+  - 0.0.2.208
+    Add a button "VideoPins" to #watch-actions
+    Disable title click pop-up.
+
+  - 0.0.2.206
+    Support any youtube video to pop-up, just click the title of video. (see help1.bmp)
+    Support win7, winXP, kubuntu12.04 LTS. The others version need to test.
