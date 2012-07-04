@@ -19,31 +19,39 @@
       "message": "Auto play"
   },
 
+  "opt_width": {
+      "message": "Width"
+  },
+
+  "opt_height": {
+      "message": "Height"
+  },
+  
+  "opt_scale_warning": {
+      "message": "WARNING: If the window is too small may cause the video can not play."
+  },
+
   "opt_position": {
       "message": "Pop-up window position: "
   },
 
   "opt_pos0": {
-      "message": "On the top left."
+      "message": "Upper-left"
   },
 
   "opt_pos1": {
-      "message": "On the top right."
+      "message": "Upper-right"
   },
 
   "opt_pos2": {
-      "message": "Center."
+      "message": "Center"
   },
 
   "opt_pos3": {
-      "message": "On the bottom left."
+      "message": "Lower-left"
   },
 
   "opt_pos4": {
-      "message": "On the bottom right."
-  },
-
-  "opt_test": {
-      "message": "Test"
+      "message": "Lower-right"
   }
 }

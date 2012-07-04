@@ -7,7 +7,10 @@ chrome.extension.onRequest.addListener
         switch(request.request)
         {
         case 'openWindow':
-            openWindow(request.value);
+            if(request.value.id)
+                openWindow(request.value);
+            else
+                alert("Fetch video id error.");
             break;
         }
     }
@@ -23,16 +26,16 @@ chrome.windows.onRemoved.addListener
 );
 
 function openWindow(obj)
-{  
-    var pos       = Options.Position.evl();
+{      
+    var pos       = Options.Position.evl(Options.Scale.Width(), Options.Scale.Height());
     var newObj    = new Object();
     newObj.id     = obj.id;
     newObj.title  = obj.title;
     newObj.type   = obj.type;
     newObj.x      = pos.x;
     newObj.y      = pos.y;
-    newObj.width  = 640;
-    newObj.height = 390;
+    newObj.width  = Options.Scale.Width();
+    newObj.height = Options.Scale.Height();
     newObj.html   = getYoutubeEmbedLink(obj.id);
 
     var wid = Pins.get(newObj.title);

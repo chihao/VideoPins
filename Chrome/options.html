@@ -12,7 +12,7 @@
 
             function GenerateForm()
             {
-        		var container = $('ul#option-items');
+                var container = $('ul#option-items');
                 var items = bg_page.Options.get();
 
                 for(var i in items)
@@ -23,6 +23,42 @@
                     {
                     case 'checkbox':
                         container.append(GenerateCheckBox(item));
+                        break;
+
+                    case 'slider':
+                        $(function(){
+                            var value = bg_page.Options.get("scale");
+                            
+                            /* Set labels */
+                            $("#option-width").text( chrome.i18n.getMessage('opt_width')+':' );
+                            $("#option-height").text( chrome.i18n.getMessage('opt_height')+':' );
+                            $("#option-width-value").text(  bg_page.Options.Scale.Width() +'px' );
+                            $("#option-height-value").text( bg_page.Options.Scale.Height()+'px' );
+                            
+                            /* Set slider */                            
+                            $("#slider-value").text((value*100).toFixed(0)+'%');
+                            $("#slider").slider({
+                                value : value,
+                                min   : 0,
+                                max   : 2,
+                                step  : 0.05,
+                                range : "min",
+                                slide: function(event, ui) {
+                                    value = parseFloat(ui.value);
+                                    bg_page.Options.set("scale", value);
+                                    $("#slider-value").text((value*100).toFixed(0)+'%');
+                                    $("#option-width-value").text(  bg_page.Options.Scale.Width() +'px' );
+                                    $("#option-height-value").text( bg_page.Options.Scale.Height()+'px' );
+                                    
+                                    if(parseFloat(value)<0.5) $("#slider-warning").show(); else $("#slider-warning").hide();
+                                }
+                            });
+                            
+                            /* Warning message */
+                            if(parseFloat(value)<0.5) $("#slider-warning").show(); else $("#slider-warning").hide();                            
+                            $("#slider-warning").text(chrome.i18n.getMessage('opt_scale_warning'));
+                            // $("#slider").slider("value")
+                        });
                         break;
                     
                     case 'position':
@@ -57,7 +93,7 @@
                 }
 
                 $("#version").text(chrome.i18n.getMessage("version")+":"+chrome.app.getDetails().version);
-			}
+            }
 
             function GenerateCheckBox(item)
             {
@@ -74,7 +110,6 @@
                             {
                                 var cbox = $(this)[0];
                                 bg_page.Options.set(cbox.name, cbox.checked);
-                                // bg_page.option_save();
                             })
                         )
                         .append(
@@ -85,16 +120,37 @@
                         );
             }
         </script>
+        <script type="text/javascript">
+            
+        </script>
     </head>
     <body onload="GenerateForm();">
         <div id="options">
-        	<header>
+            <header>
                 <h1>VideoPins Options.</h1>
             </header>
 
             <form>
                 <!--<label class="title">test</label>-->
-            	<ul id="option-items"></ul>
+                <ul id="option-items"></ul>
+                <hr/>
+                <center>
+                <p>
+                    <table>
+                    <tr>
+                        <td id="option-width"></td>
+                        <td id="option-width-value"></td>
+                        <td id="option-height"></td>
+                        <td id="option-height-value"></td>
+                    </tr>
+                    </table>
+                </p>
+                <p>
+                    <div id="slider"></div>
+                    <div id="slider-value"></div>
+                </p>
+                <label id="slider-warning"></label>
+                </center>
                 <hr/>
                 <div id="option-pos">
                     <label id="option-pos-label"></label>

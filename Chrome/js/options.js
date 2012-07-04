@@ -1,13 +1,17 @@
- 
+
 var Options = 
 {
     version : 1,
+    Width : 640,
+    Height : 390,
     default : {
                 "autoplay" : { key : "autoplay", type : "checkbox", value : true  },
+                "scale"    : { key : "scale"   , type : "slider"  , value : 0.8   },
                 "position" : { key : "position", type : "position", value : 0     }
               },
 
-    _list : new Object(this.default),
+    _list : null,    
+    init : function() { this._list = this.get(); },
 
     set :
     function(key, value)
@@ -39,44 +43,51 @@ var Options =
         return isNew;
     },
 
+    /* Options.Scale*/
+    Scale :
+    {
+        Width  : function() { return parseInt(Options.Width  * parseFloat(Options.get("scale"))); },
+        Height : function() { return parseInt(Options.Height * parseFloat(Options.get("scale"))); }        
+    },
+    
     /* Options.Position */
     Position :
     {
-        TL : 0,
-        TR : 1,
-        CT : 2,
-        BL : 3,
-        BR : 4,
+        TL : '0',
+        TR : '1',
+        CT : '2',
+        BL : '3',
+        BR : '4',
         evl : 
-        function()
+        function(window_W, window_H)
         {
-            // window.screen.height = 768
-            // window.screen.width = 1366
             var pos = new Object();
             switch(Options.get("position"))
             {
             case Options.Position.TL:
-                pos = {x: 0, y: 0};
+                pos = { x: 0, y: 0 };
                 break;
 
             case Options.Position.TR:
-                pos = {x: 0, y: 0};
+                pos = { x: window.screen.availWidth-window_W, y: 0 };
                 break;
 
             case Options.Position.CT:
-                pos = {x: 0, y: 0};
+                pos = { x: (window.screen.availWidth-window_W)/2, 
+                        y: (window.screen.availHeight-window_H)/2 };
                 break;
 
             case Options.Position.BL:
-                pos = {x: 0, y: 0};
+                pos = { x: 0, y: window.screen.availHeight-window_H };
                 break;
 
             case Options.Position.BR:
-                pos = {x: 0, y: 0};
+                pos = { x: window.screen.availWidth-window_W, 
+                        y: window.screen.availHeight-window_H };
                 break;
 
             default:
-                pos = {x: 0, y: 0};
+                pos = { x: 0, y: 0 };
                 break;
             }
             return pos;
@@ -85,3 +96,4 @@ var Options =
 
     toString : function() { return "[Object Options]"; }
 };
+Options.init();

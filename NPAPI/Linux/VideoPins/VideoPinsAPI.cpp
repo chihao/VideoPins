@@ -48,6 +48,7 @@ FB::variant VideoPinsAPI::HookWindow(const std::string classN, const std::string
     window_state(disp, activate, opt);
 
     XResizeWindow(disp, activate, width, height);
+    XMoveWindow(disp, activate, x, y);
 
     XCloseDisplay(disp);
 

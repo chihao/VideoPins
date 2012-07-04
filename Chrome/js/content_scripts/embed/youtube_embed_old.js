@@ -38,3 +38,5 @@ $("object").each(function(index) {
         });
     }
 });
+
+// <object type="application/x-shockwave-flash" id="myytplayer" name="myytplayer" data="http://www.youtube.com/v/EVDCzYeiqaI?enablejsapi=1&amp;playerapiid=ytplayer&amp;fs=1&amp;showinfo=0&amp;cc_load_policy=1&amp;iv_load_policy=3" width="640" height="510" title="Flash"><param name="allowScriptAccess" value="always"><param name="allowFullScreen" value="true"></object>

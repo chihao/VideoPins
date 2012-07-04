@@ -12,7 +12,7 @@ if(window.location.href.indexOf("#")<0 && typeof $("body").find("#VideoPins_btn"
         zIndex: '999'
     });
 
-  	$('#VideoPins_btn').click(function(){
+    $('#VideoPins_btn').click(function(){
         $.get("https://gdata.youtube.com/feeds/api/videos/"+YoutubeId,
             function(xml){
                 var obj = new Object();
@@ -22,14 +22,14 @@ if(window.location.href.indexOf("#")<0 && typeof $("body").find("#VideoPins_btn"
                 
                 chrome.extension.sendRequest({request: "openWindow", value: obj});
             }, "xml");
-  	    return false;
-  	});
+        return false;
+    });
 
-  	$("body").hover(function(){
+    $("body").hover(function(){
           $('#VideoPins_btn').animate({
               right: '0px'
             }, 300 );
-  	}, function(){
+    }, function(){
           var width = $('#VideoPins_btn')[0].offsetWidth;
           $('#VideoPins_btn').animate({
               right: -width + 'px'

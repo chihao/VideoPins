@@ -116,7 +116,9 @@
             m_Pin = new VideoPins(document.getElementById("embedVideoPins"));
             
             // windows XP offset: width=10, height=27. correct=650,418.
-            var hWnd = m_Pin.HookWindow(document.title, obj.x, obj.y, obj.width+bg_page.OS_windowOffsetW, obj.height+bg_page.OS_windowOffsetH);
+            // var hWnd = m_Pin.HookWindow(document.title, obj.x, obj.y, obj.width+bg_page.OS_windowOffsetW, obj.height+bg_page.OS_windowOffsetH);
+
+            var hWnd = m_Pin.HookWindow(document.title, obj.x, obj.y, obj.width, obj.height);
 
             chrome.windows.getCurrent(
                 function(window)

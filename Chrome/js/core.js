@@ -1,6 +1,6 @@
 function getType(url)
 {
-	return '';
+    return '';
 }
 
 function getYoutubeEmbedLink(id)
@@ -17,16 +17,17 @@ function getYoutubeEmbedLink(id)
 
 function getYoutubeId(url)
 {
-    var reg = new RegExp('(?:https?://)?(?:www\\.)?(?:youtu\\.be/|youtube\\.com(?:/embed/|/v/|/watch\\?v=))([\\w-]{10,12})', 'g');
+    var reg = new RegExp('(?:https?://)?(?:www\\.)?(?:youtu\\.be/|youtube\\.com(?:/embed/|/v/|/watch\\?v=|.*&v=))([\\w-]{10,12})', 'g');
+    // var reg = new RegExp('(?:https?://)?(?:www\\.)?(?:youtu\\.be/|youtube\\.com(?:/embed/|/v/|/watch\\?v=))([\\w-]{10,12})', 'g');
     var temp = reg.exec(url);
     return (temp)? temp[1] : null;
 }
 
 function getEmbedButton()
 {
-	var ret = '<button type="button" id="VideoPins_btn" class="yt-uix-tooltip-reverse yt-uix-button yt-uix-button-default yt-uix-tooltip" title="'+chrome.i18n.getMessage('tooltip')+'" data-tooltip-text="'+chrome.i18n.getMessage('tooltip')+'">\
-              		<span class="yt-uix-button-content">\
-                    	<img class="addto-label" src="'+chrome.extension.getURL('/images/icon.png')+'" alt="'+chrome.i18n.getMessage('tooltip')+'">' + 
+    var ret = '<button type="button" id="VideoPins_btn" class="yt-uix-tooltip-reverse yt-uix-button yt-uix-button-default yt-uix-tooltip" title="'+chrome.i18n.getMessage('tooltip')+'" data-tooltip-text="'+chrome.i18n.getMessage('tooltip')+'">\
+                      <span class="yt-uix-button-content">\
+                        <img class="addto-label" src="'+chrome.extension.getURL('/images/icon.png')+'" alt="'+chrome.i18n.getMessage('tooltip')+'">' + 
                     '</span>\
                </button>';
     return ret;
