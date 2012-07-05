@@ -1,4 +1,8 @@
 change log:
+  - 0.0.2.55
+    Disable "Always on top" when video paused.
+    Add some options.
+
   - 0.0.2.5
     Use YouTube API.
     Add option page.

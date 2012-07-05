@@ -36,6 +36,9 @@ public:
     {
         registerMethod("echo",      make_method(this, &VideoPinsAPI::echo));
         registerMethod("HookWindow", make_method(this, &VideoPinsAPI::HookWindow));
+        registerMethod("ReHookWindow", make_method(this, &VideoPinsAPI::ReHookWindow));
+        registerMethod("UnHookWindow", make_method(this, &VideoPinsAPI::UnHookWindow));
+
         registerMethod("testEvent", make_method(this, &VideoPinsAPI::testEvent));
         
         // Read-write property
@@ -73,6 +76,8 @@ public:
 
 	// Method HookWindow
 	int HookWindow(const std::wstring class_name, const std::wstring title_name, const int x, const int y, const int width, const int height);
+	int VideoPinsAPI::ReHookWindow(const int t_hWnd);
+	int VideoPinsAPI::UnHookWindow(const int t_hWnd);
     
     // Event helpers
     FB_JSAPI_EVENT(test, 0, ());

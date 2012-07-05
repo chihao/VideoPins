@@ -1,17 +1,44 @@
 
 var Options = 
 {
-    version : 1,
-    Width : 640,
-    Height : 390,
+    Width   : 640,
+    Height  : 390,
     default : {
                 "autoplay" : { key : "autoplay", type : "checkbox", value : true  },
-                "scale"    : { key : "scale"   , type : "slider"  , value : 0.8   },
+                "scale"    : { key : "scale"   , type : "slider"  , value : 1.0   },
                 "position" : { key : "position", type : "position", value : 0     }
               },
 
-    _list : null,    
-    init : function() { this._list = this.get(); },
+    _list : null,
+    init : 
+    function()
+    {
+        // Copy from default list.
+        var list = new Object(this.default);
+
+        // Initial
+        if((typeof localStorage['options']==="undefined"))
+            this._list = new Object(list);
+        else
+        {
+            this._list = JSON.parse(localStorage['options']);
+
+            // Add new property.
+            for(var i in list)
+            {
+                if(typeof this._list[i]==="undefined") this._list[i] = list[i];
+            }
+
+            // Remove excess property.
+            for(var i in this._list)
+            {
+                if(typeof list[i]==="undefined") delete this._list[i];
+            }
+        }
+
+        // Store
+        localStorage['options'] = JSON.stringify(this._list);
+    },
 
     set :
     function(key, value)
@@ -22,25 +49,8 @@ var Options =
 
     get : function(key)
     {
-        var ls_option = localStorage['options'];
-
-        if(typeof ls_option == "undefined" || this.checkVer())
-        {
-            localStorage['options'] = JSON.stringify(this.default);
-        }
-
         this._list = JSON.parse(localStorage['options']);
         return (typeof key == "undefined")? this._list : this._list[key].value;
-    },
-
-    checkVer :
-    function()
-    {
-        var oldVer = parseInt(localStorage['options_ver']);
-        var isNew = (oldVer != this.version);
-        if(isNew) localStorage['options_ver'] = this.version;
-
-        return isNew;
     },
 
     /* Options.Scale*/

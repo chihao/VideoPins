@@ -22,7 +22,28 @@
                     switch(item.type)
                     {
                     case 'checkbox':
-                        container.append(GenerateCheckBox(item));
+                        container.append($(document.createElement("li"))
+                            .append(
+                                $(document.createElement("input")).attr({
+                                    id      : 'option-' + item.key,
+                                    name    : item.key,
+                                    value   : item.value,
+                                    type    : 'checkbox',
+                                    checked : item.value
+                                })
+                                .click(function(event)
+                                {
+                                    var cbox = $(this)[0];
+                                    bg_page.Options.set(cbox.name, cbox.checked);
+                                })
+                            )
+                            .append(
+                                $(document.createElement('label')).attr({
+                                    'for':  'option-' + item.key
+                                })
+                                .text(chrome.i18n.getMessage('opt_'+item.key))
+                            )
+                        );
                         break;
 
                     case 'slider':
@@ -93,31 +114,6 @@
                 }
 
                 $("#version").text(chrome.i18n.getMessage("version")+":"+chrome.app.getDetails().version);
-            }
-
-            function GenerateCheckBox(item)
-            {
-                return $(document.createElement("li"))
-                        .append(
-                            $(document.createElement("input")).attr({
-                                id      : 'option-' + item.key,
-                                name    : item.key,
-                                value   : item.value,
-                                type    : 'checkbox',
-                                checked : item.value
-                            })
-                            .click(function(event)
-                            {
-                                var cbox = $(this)[0];
-                                bg_page.Options.set(cbox.name, cbox.checked);
-                            })
-                        )
-                        .append(
-                            $(document.createElement('label')).attr({
-                                'for':  'option-' + item.key
-                            })
-                            .text( chrome.i18n.getMessage('opt_'+item.key) )
-                        );
             }
         </script>
         <script type="text/javascript">

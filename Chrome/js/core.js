@@ -9,7 +9,7 @@ function getYoutubeEmbedLink(id)
 
     var src = "http://www.youtube.com/embed/"+id;
     var ret = '<iframe id="ytplayer" type="text/html" \
-                src="'+src+'#" \
+                src="'+src+'?autohide=1#" \
                 frameborder="0" allowfullscreen>';
 
     return ret;
