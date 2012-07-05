@@ -1,173 +1,173 @@
 <html>
-    <head>
-        <title>VideoPins Options</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <link type="text/css" href="css/redmond/jquery-ui-1.8.21.custom.css" rel="stylesheet" />
-        <link type="text/css" href="css/options.css" rel="stylesheet" />
+<head>
+<title>VideoPins Options</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" href="css/redmond/jquery-ui-1.8.21.custom.css" rel="stylesheet" />
+<link type="text/css" href="css/options.css" rel="stylesheet" />
 
-        <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-        <script type="text/javascript" src="js/jquery-ui-1.8.21.custom.min.js"></script>
-        <script type="text/javascript">
-            var bg_page = chrome.extension.getBackgroundPage();
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.21.custom.min.js"></script>
+<script type="text/javascript">
+    var bg_page = chrome.extension.getBackgroundPage();
 
-            function GenerateForm()
+    function GenerateForm()
+    {
+        var container = $('ul#option-items');
+        var items = bg_page.Options.get();
+
+        for(var i in items)
+        {
+            var item = items[i];
+
+            switch(item.type)
             {
-                var container = $('ul#option-items');
-                var items = bg_page.Options.get();
+            case 'checkbox':
+                container.append($(document.createElement("li"))
+                    .append(
+                        $(document.createElement("input")).attr({
+                            id      : 'option-' + item.key,
+                            name    : item.key,
+                            value   : item.value,
+                            type    : 'checkbox',
+                            checked : item.value
+                        })
+                        .click(function(event)
+                        {
+                            var cbox = $(this)[0];
+                            bg_page.Options.set(cbox.name, cbox.checked);
+                        })
+                    )
+                    .append(
+                        $(document.createElement('label')).attr({
+                            'for':  'option-' + item.key
+                        })
+                        .text(chrome.i18n.getMessage('opt_'+item.key))
+                    )
+                );
+                break;
 
-                for(var i in items)
-                {
-                    var item = items[i];
-
-                    switch(item.type)
-                    {
-                    case 'checkbox':
-                        container.append($(document.createElement("li"))
-                            .append(
-                                $(document.createElement("input")).attr({
-                                    id      : 'option-' + item.key,
-                                    name    : item.key,
-                                    value   : item.value,
-                                    type    : 'checkbox',
-                                    checked : item.value
-                                })
-                                .click(function(event)
-                                {
-                                    var cbox = $(this)[0];
-                                    bg_page.Options.set(cbox.name, cbox.checked);
-                                })
-                            )
-                            .append(
-                                $(document.createElement('label')).attr({
-                                    'for':  'option-' + item.key
-                                })
-                                .text(chrome.i18n.getMessage('opt_'+item.key))
-                            )
-                        );
-                        break;
-
-                    case 'slider':
-                        $(function(){
-                            var value = bg_page.Options.get("scale");
-                            
-                            /* Set labels */
-                            $("#option-width").text( chrome.i18n.getMessage('opt_width')+':' );
-                            $("#option-height").text( chrome.i18n.getMessage('opt_height')+':' );
+            case 'slider':
+                $(function(){
+                    var value = bg_page.Options.get("scale");
+                    
+                    /* Set labels */
+                    $("#option-width").text( chrome.i18n.getMessage('opt_width')+':' );
+                    $("#option-height").text( chrome.i18n.getMessage('opt_height')+':' );
+                    $("#option-width-value").text(  bg_page.Options.Scale.Width() +'px' );
+                    $("#option-height-value").text( bg_page.Options.Scale.Height()+'px' );
+                    
+                    /* Set slider */                            
+                    $("#slider-value").text((value*100).toFixed(0)+'%');
+                    $("#slider").slider({
+                        value : value,
+                        min   : 0,
+                        max   : 2,
+                        step  : 0.05,
+                        range : "min",
+                        slide: function(event, ui) {
+                            value = parseFloat(ui.value);
+                            bg_page.Options.set("scale", value);
+                            $("#slider-value").text((value*100).toFixed(0)+'%');
                             $("#option-width-value").text(  bg_page.Options.Scale.Width() +'px' );
                             $("#option-height-value").text( bg_page.Options.Scale.Height()+'px' );
                             
-                            /* Set slider */                            
-                            $("#slider-value").text((value*100).toFixed(0)+'%');
-                            $("#slider").slider({
-                                value : value,
-                                min   : 0,
-                                max   : 2,
-                                step  : 0.05,
-                                range : "min",
-                                slide: function(event, ui) {
-                                    value = parseFloat(ui.value);
-                                    bg_page.Options.set("scale", value);
-                                    $("#slider-value").text((value*100).toFixed(0)+'%');
-                                    $("#option-width-value").text(  bg_page.Options.Scale.Width() +'px' );
-                                    $("#option-height-value").text( bg_page.Options.Scale.Height()+'px' );
-                                    
-                                    if(parseFloat(value)<0.5) $("#slider-warning").show(); else $("#slider-warning").hide();
-                                }
-                            });
-                            
-                            /* Warning message */
-                            if(parseFloat(value)<0.5) $("#slider-warning").show(); else $("#slider-warning").hide();                            
-                            $("#slider-warning").text(chrome.i18n.getMessage('opt_scale_warning'));
-                            // $("#slider").slider("value")
-                        });
-                        break;
+                            if(parseFloat(value)<0.5) $("#slider-warning").show(); else $("#slider-warning").hide();
+                        }
+                    });
                     
-                    case 'position':
-                        $(function(){
-                            /* Set label */
-                            $("#option-pos-label").text(chrome.i18n.getMessage('opt_'+item.key));
-                            $("#option-pos-label-value").text(chrome.i18n.getMessage('opt_pos'+item.value));
-                            
-                            /* Set default checked */
-                            var $radios = $('input:radio[name=pos]');
-                            if($radios.is(':checked') === false) {
-                                $radios.filter('[value='+item.value+']').attr('checked', true);
-                            }
-
-                            /* Set radios */
-                            $("#option-pos").buttonset();
-                            $("#option-pos label").addClass('ui-corner-all');
-                            $("#option-pos .pos").button({
-                                icons: {
-                                    primary: "ui-icon-block"
-                                },
-                                text: false})
-                                .click(function(event)
-                                {
-                                    var value = $(this)[0].value;
-                                    bg_page.Options.set("position", value);
-                                    $("#option-pos-label-value").text(chrome.i18n.getMessage('opt_pos'+value));
-                                });
-                        });
-                        break;
+                    /* Warning message */
+                    if(parseFloat(value)<0.5) $("#slider-warning").show(); else $("#slider-warning").hide();                            
+                    $("#slider-warning").text(chrome.i18n.getMessage('opt_scale_warning'));
+                    // $("#slider").slider("value")
+                });
+                break;
+            
+            case 'position':
+                $(function(){
+                    /* Set label */
+                    $("#option-pos-label").text(chrome.i18n.getMessage('opt_'+item.key));
+                    $("#option-pos-label-value").text(chrome.i18n.getMessage('opt_pos'+item.value));
+                    
+                    /* Set default checked */
+                    var $radios = $('input:radio[name=pos]');
+                    if($radios.is(':checked') === false) {
+                        $radios.filter('[value='+item.value+']').attr('checked', true);
                     }
-                }
 
-                $("#version").text(chrome.i18n.getMessage("version")+":"+chrome.app.getDetails().version);
+                    /* Set radios */
+                    $("#option-pos").buttonset();
+                    $("#option-pos label").addClass('ui-corner-all');
+                    $("#option-pos .pos").button({
+                        icons: {
+                            primary: "ui-icon-block"
+                        },
+                        text: false})
+                        .click(function(event)
+                        {
+                            var value = $(this)[0].value;
+                            bg_page.Options.set("position", value);
+                            $("#option-pos-label-value").text(chrome.i18n.getMessage('opt_pos'+value));
+                        });
+                });
+                break;
             }
-        </script>
-        <script type="text/javascript">
-            
-        </script>
-    </head>
-    <body onload="GenerateForm();">
-        <div id="options">
-            <header>
-                <h1>VideoPins Options.</h1>
-            </header>
+        }
 
-            <form>
-                <!--<label class="title">test</label>-->
-                <ul id="option-items"></ul>
-                <hr/>
+        $("#version").text(chrome.i18n.getMessage("version")+":"+chrome.app.getDetails().version);
+    }
+</script>
+<script type="text/javascript">
+    
+</script>
+</head>
+<body onload="GenerateForm();">
+    <div id="options">
+        <header>
+            <h1>VideoPins Options.</h1>
+        </header>
+
+        <form>
+            <!--<label class="title">test</label>-->
+            <ul id="option-items"></ul>
+            <hr/>
+            <center>
+            <p>
+                <table>
+                <tr>
+                    <td id="option-width"></td>
+                    <td id="option-width-value"></td>
+                    <td id="option-height"></td>
+                    <td id="option-height-value"></td>
+                </tr>
+                </table>
+            </p>
+            <p>
+                <div id="slider"></div>
+                <div id="slider-value"></div>
+            </p>
+            <label id="slider-warning"></label>
+            </center>
+            <hr/>
+            <div id="option-pos">
+                <label id="option-pos-label"></label>
                 <center>
-                <p>
-                    <table>
-                    <tr>
-                        <td id="option-width"></td>
-                        <td id="option-width-value"></td>
-                        <td id="option-height"></td>
-                        <td id="option-height-value"></td>
-                    </tr>
-                    </table>
-                </p>
-                <p>
-                    <div id="slider"></div>
-                    <div id="slider-value"></div>
-                </p>
-                <label id="slider-warning"></label>
+                <label id="option-pos-label-value" style="font-weight:bold;"></label>
+                <table class="ui-corner-all">
+                    <tr><td>
+                    <input type="radio" id="pos0" class="pos" value="0" name="pos" /><label for="pos0">Choice 0</label></td><td></td><td>
+                    <input type="radio" id="pos1" class="pos" value="1" name="pos" /><label for="pos1">Choice 1</label></td></tr><tr><td></td>
+                    <td class="middle">
+                    <input type="radio" id="pos2" class="pos" value="2" name="pos" /><label for="pos2">Choice 2</label></td><td></td></tr><tr><td>
+                    <input type="radio" id="pos3" class="pos" value="3" name="pos" /><label for="pos3">Choice 3</label></td><td></td><td>
+                    <input type="radio" id="pos4" class="pos" value="4" name="pos" /><label for="pos4">Choice 4</label></td></tr>
+                </table>
                 </center>
-                <hr/>
-                <div id="option-pos">
-                    <label id="option-pos-label"></label>
-                    <center>
-                    <label id="option-pos-label-value" style="font-weight:bold;"></label>
-                    <table class="ui-corner-all">
-                        <tr><td>
-                        <input type="radio" id="pos0" class="pos" value="0" name="pos" /><label for="pos0">Choice 0</label></td><td></td><td>
-                        <input type="radio" id="pos1" class="pos" value="1" name="pos" /><label for="pos1">Choice 1</label></td></tr><tr><td></td>
-                        <td class="middle">
-                        <input type="radio" id="pos2" class="pos" value="2" name="pos" /><label for="pos2">Choice 2</label></td><td></td></tr><tr><td>
-                        <input type="radio" id="pos3" class="pos" value="3" name="pos" /><label for="pos3">Choice 3</label></td><td></td><td>
-                        <input type="radio" id="pos4" class="pos" value="4" name="pos" /><label for="pos4">Choice 4</label></td></tr>
-                    </table>
-                    </center>
-                </div>
-            </form>
-            
-            <footer>
-                <p id="version"></p>
-            </footer>
-        </div>
-    </body>
+            </div>
+        </form>
+        
+        <footer>
+            <p id="version"></p>
+        </footer>
+    </div>
+</body>
 </html>

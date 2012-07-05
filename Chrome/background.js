@@ -16,6 +16,15 @@ chrome.extension.onRequest.addListener
     }
 );
 
+chrome.webRequest.onBeforeRequest.addListener
+(
+    function(details) {
+       return {cancel: details.url.indexOf("/googleads.") != -1};
+    },
+    {urls: ["<all_urls>"]},
+    ["blocking"]
+);
+
 chrome.windows.onRemoved.addListener
 (
     function(wid)
