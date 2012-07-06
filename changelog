@@ -1,7 +1,11 @@
 = Changelog
 
 = Versions
-Latest Chrome version: 0.0.2.6
+Latest Chrome version: 0.2.6.0
+  
+  - 0.2.6.0
+    Modified option page.
+    Upgrade the version number [0.0.2.6=>0.2.6.0]
 
   - 0.0.2.6
     Manifest.json upgrade to version 2.
