@@ -27,42 +27,40 @@ FB::variant VideoPinsAPI::echo(const FB::variant& msg)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn FB::variant VideoPinsAPI::echo(const FB::variant& msg)
+/// @fn FB::variant VideoPinsAPI::vFindWindow(const std::wstring class_name, const std::wstring title_name)
 ///
 /// @brief  Echos whatever is passed from Javascript.
 ///         Go ahead and change it. See what happens!
 ///////////////////////////////////////////////////////////////////////////////
-int VideoPinsAPI::HookWindow(const std::wstring class_name, const std::wstring title_name, const int x, const int y, const int width, const int height)
+int VideoPinsAPI::vFindWindow(const std::wstring class_name, const std::wstring title_name)
 {
-	HWND hWnd = 0;
-	//RECT rcClient, rcWind;
-	//POINT ptDiff;
-	
-	while(!hWnd)
-	{
-		hWnd = FindWindow(class_name.c_str(), title_name.c_str());
-	}
-/*
-	GetClientRect(hWnd, &rcClient);
-	GetWindowRect(hWnd, &rcWind);
-	ptDiff.x = (rcWind.right - rcWind.left) - rcClient.right;
-	ptDiff.y = (rcWind.bottom - rcWind.top) - rcClient.bottom;
-*/
+	return (int) FindWindow(class_name.c_str(), title_name.c_str());
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn FB::variant VideoPinsAPI::HookWindow(const int t_hWnd, const int x, const int y, const int width, const int height)
+///
+/// @brief  Echos whatever is passed from Javascript.
+///         Go ahead and change it. See what happens!
+///////////////////////////////////////////////////////////////////////////////
+int VideoPinsAPI::HookWindow(const int t_hWnd, const int x, const int y, const int width, const int height)
+{
+	HWND hWnd = (HWND) t_hWnd;
 	::SetWindowPos(
-			hWnd,       // handle to window
-            HWND_TOPMOST,  // placement-order handle
-            x,     // horizontal position
-            y,      // vertical position
-            width,// + ptDiff.x,  // width
-            height,// + ptDiff.y, // height
-            SWP_SHOWWINDOW// window-positioning options
+			hWnd,                                // handle to window
+            HWND_TOPMOST,         // placement-order handle
+            x,                                         // horizontal position
+            y,                                         // vertical position
+            width,                                // width
+            height,                              // height
+            SWP_SHOWWINDOW // window-positioning options
 	);
 	
 	return (int) hWnd;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn FB::variant VideoPinsAPI::echo(const FB::variant& msg)
+/// @fn FB::variant VideoPinsAPI::ReHookWindow(const int t_hWnd)
 ///
 /// @brief  Echos whatever is passed from Javascript.
 ///         Go ahead and change it. See what happens!
@@ -73,20 +71,20 @@ int VideoPinsAPI::ReHookWindow(const int t_hWnd)
 	RECT rcWind;
 	GetWindowRect(hWnd, &rcWind);
 	::SetWindowPos(
-			hWnd,       // handle to window
-            HWND_TOPMOST,  // placement-order handle
-            rcWind.left,     // horizontal position
-            rcWind.top,      // vertical position
+			hWnd,                                              // handle to window
+            HWND_TOPMOST,                       // placement-order handle
+            rcWind.left,                                     // horizontal position
+            rcWind.top,                                     // vertical position
             (rcWind.right - rcWind.left),       // width
             (rcWind.bottom - rcWind.top), // height
-            SWP_SHOWWINDOW// window-positioning options
+            SWP_SHOWWINDOW                // window-positioning options
 	);
 	
 	return (int) hWnd;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn FB::variant VideoPinsAPI::echo(const FB::variant& msg)
+/// @fn FB::variant VideoPinsAPI::UnHookWindow(const int t_hWnd)
 ///
 /// @brief  Echos whatever is passed from Javascript.
 ///         Go ahead and change it. See what happens!
@@ -97,13 +95,13 @@ int VideoPinsAPI::UnHookWindow(const int t_hWnd)
 	RECT rcWind;
 	GetWindowRect(hWnd, &rcWind);
 	::SetWindowPos(
-			hWnd,       // handle to window
-            HWND_NOTOPMOST,  // placement-order handle
-            rcWind.left,     // horizontal position
-            rcWind.top,      // vertical position
+			hWnd,                                              // handle to window
+            HWND_NOTOPMOST,                 // placement-order handle
+            rcWind.left,                                     // horizontal position
+            rcWind.top,                                     // vertical position
             (rcWind.right - rcWind.left),       // width
             (rcWind.bottom - rcWind.top), // height
-            SWP_SHOWWINDOW// window-positioning options
+            SWP_SHOWWINDOW                // window-positioning options
 	);
 	
 	return (int) hWnd;

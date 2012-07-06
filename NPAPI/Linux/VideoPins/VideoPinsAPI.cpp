@@ -27,22 +27,36 @@ FB::variant VideoPinsAPI::echo(const FB::variant& msg)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn FB::variant VideoPinsAPI::HookWindow(const std::string classN, const std::string title, const int x, const int y, const int width, const int height)
+/// @fn FB::variant VideoPinsAPI::vFindWindow(const std::string classN, const std::string title)
 ///
 /// @brief  Echos whatever is passed from Javascript.
 ///         Go ahead and change it. See what happens!
 ///////////////////////////////////////////////////////////////////////////////
-FB::variant VideoPinsAPI::HookWindow(const std::string classN, const std::string title, const int x, const int y, const int width, const int height)
+FB::variant VideoPinsAPI::vFindWindow(const std::string classN, const std::string title)
 {
     Window activate = EXIT_FAILURE;
     Display *disp = XOpenDisplay(NIL);
 
     std::vector<gchar> mTitle(title.c_str(),title.c_str()+title.length()+1);
     std::vector<gchar> mClass(classN.c_str(),classN.c_str()+classN.length()+1);
-    while(activate==EXIT_FAILURE)
-    {
-        activate = action_window_str(disp, &mClass[0], &mTitle[0]);
-    }
+
+    activate = action_window_str(disp, &mClass[0], &mTitle[0]);
+
+    XCloseDisplay(disp);
+
+    if(activate==EXIT_FAILURE) return 0; else return activate;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn FB::variant VideoPinsAPI::HookWindow(const int windowId, const int x, const int y, const int width, const int height)
+///
+/// @brief  Echos whatever is passed from Javascript.
+///         Go ahead and change it. See what happens!
+///////////////////////////////////////////////////////////////////////////////
+FB::variant VideoPinsAPI::HookWindow(const int windowId, const int x, const int y, const int width, const int height)
+{
+    Window activate = windowId;
+    Display *disp = XOpenDisplay(NIL);
 
     char opt[] = "add,above";
     window_state(disp, activate, opt);

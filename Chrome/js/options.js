@@ -10,6 +10,7 @@ var Options =
               },
 
     _list : null,
+    
     init : 
     function()
     {

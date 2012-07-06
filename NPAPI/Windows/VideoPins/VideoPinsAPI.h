@@ -35,6 +35,7 @@ public:
         m_plugin(plugin), m_host(host)
     {
         registerMethod("echo",      make_method(this, &VideoPinsAPI::echo));
+        registerMethod("vFindWindow", make_method(this, &VideoPinsAPI::vFindWindow));
         registerMethod("HookWindow", make_method(this, &VideoPinsAPI::HookWindow));
         registerMethod("ReHookWindow", make_method(this, &VideoPinsAPI::ReHookWindow));
         registerMethod("UnHookWindow", make_method(this, &VideoPinsAPI::UnHookWindow));
@@ -75,9 +76,10 @@ public:
     FB::variant echo(const FB::variant& msg);
 
 	// Method HookWindow
-	int HookWindow(const std::wstring class_name, const std::wstring title_name, const int x, const int y, const int width, const int height);
-	int VideoPinsAPI::ReHookWindow(const int t_hWnd);
-	int VideoPinsAPI::UnHookWindow(const int t_hWnd);
+	int vFindWindow(const std::wstring class_name, const std::wstring title_name);
+	int HookWindow(const int t_hWnd, const int x, const int y, const int width, const int height);
+	int ReHookWindow(const int t_hWnd);
+	int UnHookWindow(const int t_hWnd);
     
     // Event helpers
     FB_JSAPI_EVENT(test, 0, ());

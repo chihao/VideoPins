@@ -1,0 +1,23 @@
+body
+{
+    overflow: hidden;
+}
+iframe
+{
+    width: 100%;
+    height: 100%;
+}
+#VideoPins_Player
+{
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    position: absolute;
+}    
+#embedVideoPins
+{
+    top: -10000px;
+    left: -10000px;
+    position: absolute;
+}

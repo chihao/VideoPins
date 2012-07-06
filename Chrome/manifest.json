@@ -1,11 +1,14 @@
 {
     "name": "__MSG_name__",
-    "version": "0.0.2.551",
+    "version": "0.0.2.6",
+    "manifest_version": 2,
+    "minimum_chrome_version": "18",
     "default_locale": "en",
     "description": "__MSG_description__",
-    "background_page": "background.html",
-    "options_page": "options.html",
+    "options_page": "/options/index.html",
     "update_url": "http://clients2.google.com/service/update2/crx",
+    "content_security_policy": "default-src 'self'; script-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline'; frame-src *",
+    "web_accessible_resources": [ "images/icon.png" ],
     
     "permissions": 
     [
@@ -21,11 +24,15 @@
         { "path": "plugin/npVideoPins.dll" }
     ],   
     
+    "background": {
+        "scripts": [ "/js/core.js", "/js/options.js", "background.js" ]
+    },
+    
     "content_scripts":
     [
         {
             "matches": ["http://*.youtube.com/*", "http://youtube.com/*", "https://*.youtube.com/*", "https://youtube.com/*"],
-            "js": ["/js/jquery-1.7.2.min.js", "/js/core.js", "/js/content_scripts/youtube.js"],
+            "js": ["/jquery/jquery-1.7.2.min.js", "/js/core.js", "/js/content_scripts/youtube.js"],
             "run_at": "document_end"
         },
         {
@@ -33,13 +40,13 @@
             "include_globs": ["http://*.youtube.com/embed/*", "http://youtube.com/embed/*", "https://*.youtube.com/embed/*", "https://youtube.com/embed/*",
                               "http://*.youtube.com/v/*", "http://youtube.com/v/*", "https://*.youtube.com/v/*", "https://youtube.com/v/*"],
             "matches": ["http://*/*", "https://*/*"],
-            "js": ["/js/jquery-1.7.2.min.js", "/js/core.js", "/js/content_scripts/embed/youtube_embed.js"],
+            "js": ["/jquery/jquery-1.7.2.min.js", "/js/core.js", "/js/content_scripts/embed/youtube_embed.js"],
             "run_at": "document_end"
         },
         {
             "exclude_globs": [ "http://*.youtube.com/*", "http://youtube.com/*", "https://*.youtube.com/*", "https://youtube.com/*"],
             "matches": ["http://*/*", "https://*/*"],
-            "js": ["/js/jquery-1.7.2.min.js", "/js/core.js", "/js/content_scripts/embed/youtube_embed_old.js"],
+            "js": ["/jquery/jquery-1.7.2.min.js", "/js/core.js", "/js/content_scripts/embed/youtube_embed_old.js"],
             "run_at": "document_end"
         }
     ],
@@ -48,7 +55,7 @@
     {
         "16": "images/icon16.png",
         "32": "images/icon32.png",
-        "64": "images/icon64.png",	
+        "64": "images/icon64.png",   
         "128": "images/icon128.png"
     }
 }

@@ -16,15 +16,6 @@ chrome.extension.onRequest.addListener
     }
 );
 
-chrome.webRequest.onBeforeRequest.addListener
-(
-    function(details) {
-       return {cancel: details.url.indexOf("/googleads.") != -1};
-    },
-    {urls: ["<all_urls>"]},
-    ["blocking"]
-);
-
 chrome.windows.onRemoved.addListener
 (
     function(wid)
@@ -52,7 +43,7 @@ function openWindow(obj)
     if(wid == -1)
     {
         localStorage['video'] = JSON.stringify(newObj);
-        window.open('VideoPins.html', newObj.title, 'left='+newObj.x+', top='+newObj.y+', width='+newObj.width+', height='+newObj.height+', toolbar=no, menubar=no, location=no, status=no');
+        window.open('/VideoPins/VideoPins.html', newObj.title, 'left='+newObj.x+', top='+newObj.y+', width='+newObj.width+', height='+newObj.height+', toolbar=no, menubar=no, location=no, status=no');
     }
     else
     {
