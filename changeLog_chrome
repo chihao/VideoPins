@@ -1,7 +1,7 @@
 change log:
   - 0.0.2.6
     Manifest.json upgrade to version 2.
-    Fixed hook window deadlock.
+    Fixed bug of hook window deadlock.
     Modified blocking advertising rule.
 
   - 0.0.2.551
