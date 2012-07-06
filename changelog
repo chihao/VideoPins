@@ -1,4 +1,8 @@
-change log:
+= Changelog
+
+= Versions
+Latest Chrome version: 0.0.2.6
+
   - 0.0.2.6
     Manifest.json upgrade to version 2.
     Fixed bug of hook window deadlock.
