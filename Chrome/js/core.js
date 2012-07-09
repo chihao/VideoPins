@@ -1,3 +1,4 @@
+
 function getType(url)
 {
     return '';
@@ -17,7 +18,7 @@ function getYoutubeEmbedLink(id)
 
 function getYoutubeId(url)
 {
-    var reg = new RegExp('(?:https?://)?(?:www\\.)?(?:youtu\\.be/|youtube\\.com(?:/embed/|/v/|/watch\\?v=|.*&v=))([\\w-]{10,12})', 'g');
+    var reg = new RegExp('(?:https?://)?(?:www\\.)?(?:youtube\\.com|youtube.*\\.com(?:/embed/|/v/|/e/|/watch(?:\\?v=|.*&v=)))([\\w-]{10,12})', 'g');
     // var reg = new RegExp('(?:https?://)?(?:www\\.)?(?:youtu\\.be/|youtube\\.com(?:/embed/|/v/|/watch\\?v=))([\\w-]{10,12})', 'g');
     var temp = reg.exec(url);
     return (temp)? temp[1] : null;

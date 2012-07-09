@@ -5,16 +5,18 @@ var items = bg_page.Options.get();
 
 for(var i in items)
 {
-    var item = items[i];
+    var key  = i;
+    var item = items[key];
 
     switch(item.type)
     {
+// CheckBox.
     case 'checkbox':
         container.append($(document.createElement("li"))
             .append(
                 $(document.createElement("input")).attr({
-                    id      : 'option-' + item.key,
-                    name    : item.key,
+                    id      : 'option-' + key,
+                    name    : key,
                     value   : item.value,
                     type    : 'checkbox',
                     checked : item.value
@@ -27,13 +29,13 @@ for(var i in items)
             )
             .append(
                 $(document.createElement('label')).attr({
-                    'for':  'option-' + item.key
+                    'for':  'option-' + key
                 })
-                .text(chrome.i18n.getMessage('opt_'+item.key))
+                .text(chrome.i18n.getMessage('opt_'+key))
             )
         );
         break;
-
+// Slider.
     case 'slider':
         $(function(){
             var value = bg_page.Options.get("scale");
@@ -69,11 +71,11 @@ for(var i in items)
             // $("#slider").slider("value")
         });
         break;
-    
+// Position.    
     case 'position':
         $(function(){
             /* Set label */
-            $("#option-pos-label").text(chrome.i18n.getMessage('opt_'+item.key));
+            $("#option-pos-label").text(chrome.i18n.getMessage('opt_'+key));
             $("#option-pos-label-value").text(chrome.i18n.getMessage('opt_pos'+item.value));
             
             /* Set default checked */
@@ -101,4 +103,5 @@ for(var i in items)
     }
 }
 
+// Version.
 $("#version").text(chrome.i18n.getMessage("version")+":"+chrome.app.getDetails().version);

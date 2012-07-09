@@ -2,11 +2,11 @@
 var Options = 
 {
     Width   : 640,
-    Height  : 390,
+    Height  : 360,
     default : {
-                "autoplay" : { key : "autoplay", type : "checkbox", value : true  },
-                "scale"    : { key : "scale"   , type : "slider"  , value : 1.0   },
-                "position" : { key : "position", type : "position", value : 0     }
+                "autoplay" : { type : "checkbox", value : true  },
+                "scale"    : { type : "slider"  , value : 1.0   },
+                "position" : { type : "position", value : 0     }
               },
 
     _list : null,
@@ -14,11 +14,17 @@ var Options =
     init : 
     function()
     {
+        // Is new install.
+        var newInstall = (typeof localStorage['options']==="undefined");
+
+        // Options has been updated.
+        var optUpdated = false;
+        
         // Copy from default list.
         var list = new Object(this.default);
 
         // Initial
-        if((typeof localStorage['options']==="undefined"))
+        if(newInstall)
             this._list = new Object(list);
         else
         {
@@ -27,18 +33,30 @@ var Options =
             // Add new property.
             for(var i in list)
             {
-                if(typeof this._list[i]==="undefined") this._list[i] = list[i];
+                if(typeof this._list[i]==="undefined")
+                {
+                    optUpdated = true;
+                    this._list[i] = list[i];
+                }
             }
 
             // Remove excess property.
             for(var i in this._list)
             {
-                if(typeof list[i]==="undefined") delete this._list[i];
+                if(typeof list[i]==="undefined")
+                {
+                    optUpdated = true;
+                    delete this._list[i];
+                }
             }
         }
 
         // Store
         localStorage['options'] = JSON.stringify(this._list);
+
+        // If options has been updated then show options page.
+        if(newInstall || optUpdated)
+            chrome.tabs.create({ 'url' : chrome.extension.getURL("options/index.html") });
     },
 
     set :

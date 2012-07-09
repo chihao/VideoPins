@@ -1,8 +1,7 @@
 
-if(window.location.href.indexOf("#")<0 && typeof $("body").find("#VideoPins_btn")[0] == "undefined")
+var YoutubeId = getYoutubeId(window.location.href);
+if(YoutubeId && window.location.href.indexOf("#")<0 && typeof $("body").find("#VideoPins_btn")[0] == "undefined")
 {
-    var YoutubeId = getYoutubeId(window.location.href);
-
     $("body").append(getEmbedButton());
  
     $('#VideoPins_btn').css({

@@ -1,8 +1,13 @@
 = Changelog
 
 = Versions
-Latest Chrome version: 0.2.6.0
+Latest Chrome version: 0.2.6.1
   
+  - 0.2.6.1
+    If options has been updated will show options page.
+    Update get youtube id regex.
+    Implement String.replaceAll function by regex.
+
   - 0.2.6.0
     Modified option page.
     Upgrade the version number [0.0.2.6=>0.2.6.0]
@@ -43,4 +48,4 @@ Latest Chrome version: 0.2.6.0
 
   - 0.0.2.206
     Support any youtube video to pop-up, just click the title of video. (see help1.bmp)
-    Support win7, winXP, kubuntu12.04 LTS. The others version need to test.
+    Support win7, winXP, kubuntu12.04 LTS. The others version need to test. 

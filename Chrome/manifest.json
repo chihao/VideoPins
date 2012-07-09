@@ -1,6 +1,6 @@
 {
     "name": "__MSG_name__",
-    "version": "0.2.6.0",
+    "version": "0.2.6.1",
     "manifest_version": 2,
     "minimum_chrome_version": "18",
     "default_locale": "en",
@@ -37,8 +37,8 @@
         },
         {
             "all_frames": true,
-            "include_globs": ["http://*.youtube.com/embed/*", "http://youtube.com/embed/*", "https://*.youtube.com/embed/*", "https://youtube.com/embed/*",
-                              "http://*.youtube.com/v/*", "http://youtube.com/v/*", "https://*.youtube.com/v/*", "https://youtube.com/v/*"],
+            "include_globs": ["http://*.youtube*.com/embed/*", "http://youtube*.com/embed/*", "https://*.youtube*.com/embed/*", "https://youtube*.com/embed/*",
+                              "http://*.youtube*.com/v/*", "http://youtube*.com/v/*", "https://*.youtube*.com/v/*", "https://youtube*.com/v/*"],
             "matches": ["http://*/*", "https://*/*"],
             "js": ["/jquery/jquery-1.7.2.min.js", "/js/core.js", "/js/content_scripts/embed/youtube_embed.js"],
             "run_at": "document_end"
@@ -50,12 +50,12 @@
             "run_at": "document_end"
         }
     ],
-  
+
     "icons":
     {
         "16": "images/icon16.png",
         "32": "images/icon32.png",
-        "64": "images/icon64.png",   
+        "64": "images/icon64.png",
         "128": "images/icon128.png"
     }
 }

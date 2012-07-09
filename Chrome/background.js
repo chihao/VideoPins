@@ -30,7 +30,7 @@ function openWindow(obj)
     var pos       = Options.Position.evl(Options.Scale.Width(), Options.Scale.Height());
     var newObj    = new Object();
     newObj.id     = obj.id;
-    newObj.title  = obj.title;
+    newObj.title  = obj.title.replaceAll(/\s+/, " ");
     newObj.type   = obj.type;
     newObj.x      = pos.x;
     newObj.y      = pos.y;
@@ -84,4 +84,12 @@ var Pins =
 
     clear : function() { this._list = new Array(); },
     toString : function() { return "[Object Pins]"; }
+};
+
+String.prototype.replaceAll = 
+function(strRegex,strReplace)
+{
+    strRegex = strRegex.toString().replace(new RegExp("\\/", "gm" ), '');
+    strRegex = strRegex.replace(new RegExp("\\\\", "gm" ), "\\");
+    return this.replace(new RegExp(strRegex, "gm" ), strReplace);
 };

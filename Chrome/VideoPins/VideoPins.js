@@ -5,18 +5,18 @@ var ytplayer = null;
 
 // Blocking advertising.
 chrome.windows.getCurrent({populate:true},
-function(window)
-{
-    chrome.webRequest.onBeforeRequest.addListener
-    (
-        function(details)
-        {
-            return {cancel: details.url.indexOf("/googleads.") != -1};
-        },
-        {urls: ["<all_urls>"], tabId: window.tabs[0].id},
-        ["blocking"]
-    );
-});
+    function(window)
+    {
+        chrome.webRequest.onBeforeRequest.addListener
+        (
+            function(details)
+            {
+                return {cancel: details.url.indexOf("/googleads.") != -1};
+            },
+            {urls: ["<all_urls>"], tabId: window.tabs[0].id},
+            ["blocking"]
+        );
+    });
 
 
 window.onload = function()
@@ -30,21 +30,22 @@ window.onload = function()
 
 function Init()
 {
+    console.log(document.title===obj.title);
     if(m_Pin.FindWindow(obj.title))
     {        
         // windows XP offset: width=10, height=27. correct=650,418.
         m_Pin.Hook(obj.x, obj.y, obj.width, obj.height);
 
         chrome.windows.getCurrent(
-        function(window)
-        {
-            var newPin = new Object();
-            newPin.hWnd = m_Pin.getHWND();
-            newPin.title = obj.title;
-            //alert(window.width +'\n' + window.height);
+            function(window)
+            {
+                var newPin = new Object();
+                newPin.hWnd = m_Pin.getHWND();
+                newPin.title = obj.title;
+                //alert(window.width +'\n' + window.height);
 
-            bg_page.Pins.add(window.id, newPin);
-        });
+                bg_page.Pins.add(window.id, newPin);
+            });
 
         // Include youtube player api.
         var ytapi = document.createElement('script');
