@@ -1,6 +1,6 @@
 {
     "name": "__MSG_name__",
-    "version": "0.2.6.1",
+    "version": "0.2.6.13",
     "manifest_version": 2,
     "minimum_chrome_version": "18",
     "default_locale": "en",
@@ -25,7 +25,7 @@
     ],   
     
     "background": {
-        "scripts": [ "/js/core.js", "/js/options.js", "background.js" ]
+        "scripts": [ "/js/core.js", "/js/options.js", "/js/background.js" ]
     },
     
     "content_scripts":

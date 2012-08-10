@@ -1,8 +1,11 @@
 = Changelog
 
 = Versions
-Latest Chrome version: 0.2.6.1
+Latest Chrome version: 0.2.6.13
   
+  - 0.2.6.13
+    Remove background.html, and move background.js to directory js.
+
   - 0.2.6.1
     If options has been updated will show options page.
     Update get youtube id regex.

@@ -7,10 +7,9 @@ for(var i in items)
 {
     var key  = i;
     var item = items[key];
-
+    
     switch(item.type)
     {
-// CheckBox.
     case 'checkbox':
         container.append($(document.createElement("li"))
             .append(
