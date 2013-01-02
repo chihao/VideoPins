@@ -1,9 +1,10 @@
 
-$('#watch-actions').append(getEmbedButton());
+$('#watch7-sentiment-actions').append('<span>'+getEmbedButton()+'</span>');
+// $('#watch-actions').append(getEmbedButton());
 
 $('#VideoPins_btn').click(function(){
     var obj = new Object();
-        obj.title = $('#eow-title').text().trim();
+        obj.title = $('#watch-headline-title span').text().trim();
         obj.type  = getType(window.location.href);
         obj.id    = getYoutubeId(window.location.href);
 

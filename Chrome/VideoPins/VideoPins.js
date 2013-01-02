@@ -174,8 +174,13 @@ VideoPins.prototype =
     {
         var OS_Flag = navigator.appVersion;
 
-        if(OS_Flag.indexOf("Chromium") > 0)
-            return "crx_" + chrome.i18n.getMessage("@@extension_id") + ".Chromium-browser";
+        if(OS_Flag.indexOf("Linux")>=0)
+        {
+            if(OS_Flag.indexOf("Chromium")>=0)
+                return "crx_" + chrome.i18n.getMessage("@@extension_id") + ".Chromium-browser";
+            else
+                return "crx_" + chrome.i18n.getMessage("@@extension_id") + ".Google-chrome";
+        }
         else
             return "Chrome_WidgetWin_1";
     },

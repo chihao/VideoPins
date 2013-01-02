@@ -1,8 +1,14 @@
 = Changelog
 
 = Versions
-Latest Chrome version: 0.2.6.13
+Latest Chrome version: 0.2.6.20
   
+  - 0.2.6.20
+    Update embeded button style.
+
+  - 0.2.6.14
+    Fixed Google Chrome Linux version bug.
+
   - 0.2.6.13
     Remove background.html, and move background.js to directory js.
 

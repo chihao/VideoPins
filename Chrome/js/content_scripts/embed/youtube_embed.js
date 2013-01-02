@@ -5,10 +5,12 @@ if(YoutubeId && window.location.href.indexOf("#")<0 && typeof $("body").find("#V
     $("body").append(getEmbedButton());
  
     $('#VideoPins_btn').css({
-        top: '260px',
+        top: '75%',
         right: '0px',
         position: "fixed",
-        zIndex: '999'
+        zIndex: '999',
+        borderStyle: 'none',
+        backgroundColor: 'white'
     });
 
     $('#VideoPins_btn').click(function(){

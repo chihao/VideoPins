@@ -26,12 +26,21 @@ function getYoutubeId(url)
 
 function getEmbedButton()
 {
+    /*
     var ret = '<button type="button" id="VideoPins_btn" class="yt-uix-tooltip-reverse yt-uix-button yt-uix-button-default yt-uix-tooltip" title="'+chrome.i18n.getMessage('tooltip')+'" data-tooltip-text="'+chrome.i18n.getMessage('tooltip')+'">\
                       <span class="yt-uix-button-content">\
                         <img class="addto-label" src="'+chrome.extension.getURL('/images/icon.png')+'" alt="'+chrome.i18n.getMessage('tooltip')+'">' + 
                     '</span>\
                </button>';
+    */
+    var ret = '<button onclick=";return false;" id="VideoPins_btn" title="'+chrome.i18n.getMessage('tooltip')+'" class="yt-uix-button yt-uix-button-hh-text yt-uix-tooltip yt-uix-button-empty" type="button" data-orientation="vertical" data-position="bottomright" data-button-toggle="true" role="button">\
+                    <span class="yt-uix-button-icon-wrapper">\
+                        <img class="yt-uix-button-icon" src="'+chrome.extension.getURL('/images/icon.png')+'" alt="'+chrome.i18n.getMessage('tooltip')+'">\
+                        <span class="yt-uix-button-valign"></span>\
+                    </span>\
+                </button>';
     return ret;
+    
 }
 
 /*
